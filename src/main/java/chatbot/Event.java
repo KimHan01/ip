@@ -3,8 +3,8 @@ package chatbot;
 public class Event extends Task{
     private String from;
     private String to;
-    public Event(int taskNum, String taskName, String from, String to) {
-        super(taskNum, taskName);
+    public Event(String taskName, String from, String to) {
+        super(taskName);
         this.from = from;
         this.to = to;
     }
@@ -17,9 +17,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        // Splits the task num from the toString method in Task
-        String[] split = super.toString().split("\\.", 2);
-        return split[0] + ".[E]" + split[1] + "(from: "
-                + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
 }

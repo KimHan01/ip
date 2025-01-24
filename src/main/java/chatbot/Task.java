@@ -1,12 +1,10 @@
 package chatbot;
 
 public class Task {
-    private int taskNum;
     private String taskName;
     private boolean isDone = false;
 
-    public Task(int taskNum, String taskName) {
-        this.taskNum = taskNum;
+    public Task(String taskName) {
         this.taskName = taskName;
     }
 
@@ -44,9 +42,9 @@ public class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return taskNum + ".[X] " + taskName;
+            return "[X] " + taskName;
         } else {
-            return taskNum + ".[ ] " + taskName;
+            return "[ ] " + taskName;
         }
     }
 }

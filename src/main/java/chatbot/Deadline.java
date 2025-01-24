@@ -4,8 +4,8 @@ public class Deadline extends Task{
     private String by;
 
     // Input format is deadline <TaskName> /by <Date>
-    public Deadline(int taskNum, String taskName, String by) {
-        super(taskNum, taskName);
+    public Deadline(String taskName, String by) {
+        super(taskName);
         this.by = by;
     }
 
@@ -17,8 +17,6 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        // Splits the task num from the toString method in Task
-        String[] split = super.toString().split("\\.", 2);
-        return split[0] + ".[D]" + split[1] + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by + ")";
     }
 }

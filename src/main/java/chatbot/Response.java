@@ -14,7 +14,7 @@ public class Response {
                 "Alright listen up, kid.\nName's Rocket. Rocket Raccoon. Yeah, the genius, weapons expert, " +
                 "and the best pilot you'll ever meet.\nNow, I'm stuck here tracking your tasks instead of " +
                 "blasting through the galaxy with Groot.\nSo, what do ya want? " +
-                "Make it quick—I’ve got… virtual raccoon stuff to do.\n" + line);
+                "Make it quick, I've got virtual raccoon stuff to do.\n" + line);
     }
 
     // Rocket's farewell. Used chatGPT as well.
@@ -56,8 +56,9 @@ public class Response {
     // Response to "list" which prints out all items inside the list to the console
     public static void printListItems(ArrayList<Task> list) {
         System.out.print(line);
-        for (Task task : list) {
-            System.out.println(task.toString());
+        for (int i = 0; i < list.size(); i++) {
+            int taskNum = i + 1;
+            System.out.println(taskNum + "." + list.get(i).toString());
         }
         System.out.println(line);
     }
@@ -87,20 +88,23 @@ public class Response {
     }
 
     // Response to successfully adding a todo
-    public static void todoAdded(ToDo todo) {
+    public static void todoAdded(ToDo todo, int listSize) {
         System.out.println(line + "Successfully added ToDo:\n"
-                + todo.toString() + "\n" + line);
+                + todo.toString() + "\n"
+                + "Now you have " + listSize + " tasks in the list\n" + line);
     }
 
     // Response to successfully adding a deadline
-    public static void deadlineAdded(Deadline deadline) {
+    public static void deadlineAdded(Deadline deadline, int listSize) {
         System.out.println(line + "Successfully added Deadline:\n"
-                + deadline.toString() + "\n" + line);
+                + deadline.toString() + "\n"
+                + "Now you have " + listSize + " tasks in the list\n" + line);
     }
 
     // Response to successfully adding an event
-    public static void eventAdded(Event event) {
+    public static void eventAdded(Event event, int listSize) {
         System.out.println(line + "Successfully added Event:\n"
-                + event.toString() + "\n" + line);
+                + event.toString() + "\n"
+                + "Now you have " + listSize + " tasks in the list\n" + line);
     }
 }

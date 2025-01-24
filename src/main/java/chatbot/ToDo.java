@@ -1,8 +1,8 @@
 package chatbot;
 
 public class ToDo extends Task {
-    public ToDo(int taskNum, String taskName) {
-        super(taskNum, taskName);
+    public ToDo(String taskName) {
+        super(taskName);
     }
 
     public static boolean isTodo(String input) {
@@ -13,8 +13,6 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        // Splits the task num from the toString method in Task
-        String[] split = super.toString().split("\\.", 2);
-        return split[0] + ".[T]" + split[1];
+        return "[T]" + super.toString();
     }
 }

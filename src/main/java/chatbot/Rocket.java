@@ -61,27 +61,25 @@ public class Rocket {
                 }
             // When input is add todo task
             } else if (isTodo(input)) {
-                ToDo todo = new ToDo(tasks.size() + 1, input.trim());
+                ToDo todo = new ToDo(input.trim());
                 tasks.add(todo);
-                Response.todoAdded(todo);
+                Response.todoAdded(todo, tasks.size());
             // When input is add deadline task
             } else if (isDeadline(input)) {
                 String[] split = input.substring(9).split("/by", 2);
-                Deadline deadline = new Deadline(tasks.size() + 1,
-                        split[0].trim(), split[1].trim());
+                Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
                 tasks.add(deadline);
-                Response.deadlineAdded(deadline);
+                Response.deadlineAdded(deadline, tasks.size());
             // When input is add event task
             } else if (isEvent(input)) {
                 String[] splitBy = input.substring(6).split("/from", 2);
                 String[] splitTo = splitBy[1].split("/to", 2);
-                Event event = new Event(tasks.size() + 1,
-                        splitBy[0].trim(), splitTo[0].trim(), splitTo[1].trim());
+                Event event = new Event(splitBy[0].trim(), splitTo[0].trim(), splitTo[1].trim());
                 tasks.add(event);
-                Response.eventAdded(event);
+                Response.eventAdded(event, tasks.size());
             // Else, create task with input as name and add into the list
             } else {
-                Task task = new Task(tasks.size() + 1, input.trim());
+                Task task = new Task(input.trim());
                 tasks.add(task);
                 Response.addTaskResponse(input.trim());
             }
