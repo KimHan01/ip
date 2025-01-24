@@ -85,4 +85,22 @@ public class Response {
                 "Look, if it’s not on the list, there’s nothing to unmark. \n" +
                 "Double-check your list, alright?\n" + line);
     }
+
+    // Response to successfully adding a todo
+    public static void todoAdded(ToDo todo) {
+        System.out.println(line + "Successfully added ToDo:\n"
+                + todo.toString() + "\n" + line);
+    }
+
+    // Response to successfully adding a deadline
+    public static void deadlineAdded(Deadline deadline) {
+        System.out.println(line + "Successfully added Deadline:\n"
+                + deadline.toString() + "\n" + line);
+    }
+
+    // Response to successfully adding an event
+    public static void eventAdded(Event event) {
+        System.out.println(line + "Successfully added Event:\n"
+                + event.toString() + "\n" + line);
+    }
 }
