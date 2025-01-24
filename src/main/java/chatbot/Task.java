@@ -1,5 +1,7 @@
 package chatbot;
 
+import static chatbot.Rocket.isInteger;
+
 public class Task {
     private String taskName;
     private boolean isDone = false;
@@ -30,14 +32,6 @@ public class Task {
                 && isInteger(input.substring(7));
     }
 
-    private static boolean isInteger(String x) {
-        try {
-            int intVal = Integer.parseInt(x);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 
     @Override
     public String toString() {

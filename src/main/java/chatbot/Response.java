@@ -48,11 +48,6 @@ public class Response {
                 "Your call, but don’t blame me when the list explodes.\n" + line);
     }
 
-    // Confirmation response to successfully adding a task into the list
-    public static void addTaskResponse(String taskName) {
-        System.out.println(line + "added: " + taskName + "\n" + line);
-    }
-
     // Response to "list" which prints out all items inside the list to the console
     public static void printListItems(ArrayList<Task> list) {
         System.out.print(line);
@@ -113,5 +108,17 @@ public class Response {
         System.out.println(line + "Maybe you wanna try giving me something that makes sense,\n" +
                 "unless you want me to invent something out of thin air,\n" +
                 "which, trust me, you don't\n" + line);
+    }
+
+    // Response to successfully removal of a task
+    public static void taskRemoved(Task task, int listSize) {
+        System.out.println(line + "I've removed this task:\n" + task.toString()
+                + "\n" + "Now you have " + listSize + " tasks in the list.\n" + line);
+    }
+
+    // Response to trying to remove a task not in the list
+    public static void removeUnexistingTask() {
+        System.out.println(line + "Yeah, that's not happening. The list has limits, just like my patience.\n" +
+                "Check your list, make sure the task exists, and try again\n" + line);
     }
 }

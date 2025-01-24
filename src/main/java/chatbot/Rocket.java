@@ -90,6 +90,19 @@ public class Rocket {
                     tasks.add(event);
                     Response.eventAdded(event, tasks.size());
                 }
+            } else if (isDelete(input)) {
+                String index = input.substring(7);
+                if (isInteger(index)) {
+                    int intIndex = Integer.parseInt(index) - 1;
+                    if (intIndex >= 0 && intIndex < tasks.size()) {
+                        Task removedTask = tasks.remove(intIndex);
+                        Response.taskRemoved(removedTask, tasks.size());
+                    } else {
+                        Response.removeUnexistingTask();
+                    }
+                } else {
+                    Response.invalidInput();
+                }
             // Else, input is invalid
             } else {
                 if (input.trim().equalsIgnoreCase("todo")
@@ -100,6 +113,19 @@ public class Rocket {
                     Response.invalidInput();
                 }
             }
+        }
+    }
+
+    private static boolean isDelete(String input) {
+        return (input.length() > 7 && input.substring(0, 6).equalsIgnoreCase("delete"));
+    }
+
+    public static boolean isInteger(String x) {
+        try {
+            int intVal = Integer.parseInt(x);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 }
