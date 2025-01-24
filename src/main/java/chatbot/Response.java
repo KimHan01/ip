@@ -20,13 +20,13 @@ public class Response {
     // Rocket's farewell. Used chatGPT as well.
     public static void bye() {
         System.out.print(line + "Alright, fine. You're leaving already? Whatever. " +
-                "Just don’t blow anything up without me. Rocket out!\nmutters Stupid chatbot job…\n"
+                "Just don't blow anything up without me. Rocket out!\nmutters Stupid chatbot job...\n"
                 + line);
     }
 
     // Response when user asks to look at an empty list
     public static void emptyList() {
-        System.out.println(line + "Oh, look at that—your list of tasks is empty as a vacuum in space.\n" +
+        System.out.println(line + "Oh, look at that, your list of tasks is empty as a vacuum in space.\n" +
                 "Guess that means you're either super efficient or just really good at procrastinating." +
                 " Probably the latter.\nWant me to add \"Make a to-do list\" to your list of tasks?\n" + line);
     }
@@ -74,16 +74,16 @@ public class Response {
     }
     // Response to trying to mark a task that does not exist
     public static void unexistingTaskToMark() {
-        System.out.println(line + "Oh, you're trying to mark off a task that doesn’t even exist? \n" +
-                "If it’s not on the list, it can’t be marked as done. \n" +
-                "Check again—maybe the task is hiding in a parallel dimension or something.\n" + line);
+        System.out.println(line + "Oh, you're trying to mark off a task that doesn't even exist? \n" +
+                "If it's not on the list, it can't be marked as done. \n" +
+                "Check again, maybe the task is hiding in a parallel dimension or something.\n" + line);
     }
 
     // Response to trying to unmark a task that does not exist
     public static void unexistingTaskToUnmark() {
-        System.out.println(line + "You’re trying to unmark a task that doesn’t even exist? \n" +
-                "That’s some next-level overthinking right there. \n" +
-                "Look, if it’s not on the list, there’s nothing to unmark. \n" +
+        System.out.println(line + "You're trying to unmark a task that doesn't even exist? \n" +
+                "That's some next-level overthinking right there. \n" +
+                "Look, if it's not on the list, there's nothing to unmark. \n" +
                 "Double-check your list, alright?\n" + line);
     }
 

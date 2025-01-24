@@ -61,7 +61,8 @@ public class Rocket {
                 }
             // When input is add todo task
             } else if (isTodo(input)) {
-                ToDo todo = new ToDo(input.trim());
+                String taskName = input.substring(5);
+                ToDo todo = new ToDo(taskName.trim());
                 tasks.add(todo);
                 Response.todoAdded(todo, tasks.size());
             // When input is add deadline task
