@@ -35,8 +35,8 @@ public class Response {
     public static void addEmptyTask() {
         System.out.println(line + "Seriously? An empty task? What, are you trying to add \"nothing\" " +
                 "to your to-do list?\n" +
-                "Hate to break it to you, but that’s not how this works.\n" +
-                "Try adding something—even if it’s \"stare at the wall dramatically.\"\n" +
+                "Hate to break it to you, but that's not how this works.\n" +
+                "Try adding something, even if it's \"stare at the wall dramatically.\"\n" +
                 "At least give me something to work with here!\n" + line);
     }
 
@@ -106,5 +106,12 @@ public class Response {
         System.out.println(line + "Successfully added Event:\n"
                 + event.toString() + "\n"
                 + "Now you have " + listSize + " tasks in the list\n" + line);
+    }
+
+    // Response to invalid input
+    public static void invalidInput() {
+        System.out.println(line + "Maybe you wanna try giving me something that makes sense,\n" +
+                "unless you want me to invent something out of thin air,\n" +
+                "which, trust me, you don't\n" + line);
     }
 }

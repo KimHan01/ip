@@ -62,27 +62,43 @@ public class Rocket {
             // When input is add todo task
             } else if (isTodo(input)) {
                 String taskName = input.substring(5);
-                ToDo todo = new ToDo(taskName.trim());
-                tasks.add(todo);
-                Response.todoAdded(todo, tasks.size());
+                if (taskName.isBlank()) {
+                    Response.addEmptyTask();
+                } else {
+                    ToDo todo = new ToDo(taskName.trim());
+                    tasks.add(todo);
+                    Response.todoAdded(todo, tasks.size());
+                }
             // When input is add deadline task
             } else if (isDeadline(input)) {
                 String[] split = input.substring(9).split("/by", 2);
-                Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
-                tasks.add(deadline);
-                Response.deadlineAdded(deadline, tasks.size());
+                if (split[0].isBlank()) {
+                    Response.addEmptyTask();
+                } else {
+                    Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
+                    tasks.add(deadline);
+                    Response.deadlineAdded(deadline, tasks.size());
+                }
             // When input is add event task
             } else if (isEvent(input)) {
                 String[] splitBy = input.substring(6).split("/from", 2);
-                String[] splitTo = splitBy[1].split("/to", 2);
-                Event event = new Event(splitBy[0].trim(), splitTo[0].trim(), splitTo[1].trim());
-                tasks.add(event);
-                Response.eventAdded(event, tasks.size());
-            // Else, create task with input as name and add into the list
+                if (splitBy[0].isBlank()) {
+                    Response.addEmptyTask();
+                } else {
+                    String[] splitTo = splitBy[1].split("/to", 2);
+                    Event event = new Event(splitBy[0].trim(), splitTo[0].trim(), splitTo[1].trim());
+                    tasks.add(event);
+                    Response.eventAdded(event, tasks.size());
+                }
+            // Else, input is invalid
             } else {
-                Task task = new Task(input.trim());
-                tasks.add(task);
-                Response.addTaskResponse(input.trim());
+                if (input.trim().equalsIgnoreCase("todo")
+                        || input.trim().equalsIgnoreCase("deadline")
+                            || input.trim().equalsIgnoreCase("event")) {
+                    Response.addEmptyTask();
+                } else {
+                    Response.invalidInput();
+                }
             }
         }
     }

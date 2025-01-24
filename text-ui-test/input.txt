@@ -7,4 +7,6 @@ mark 1
 mark 3
 unmark 1
 list
+todo
+blah
 bye
