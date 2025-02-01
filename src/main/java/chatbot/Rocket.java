@@ -1,5 +1,7 @@
 package chatbot;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -11,13 +13,38 @@ import static chatbot.ToDo.isTodo;
 
 public class Rocket {
     public static void main(String[] args) {
+        String directory = "src/main/java/chatbot/chatbot.data";
+        String filePath = directory + "/storage.txt";
+        File dir = new File(directory);
+        File file = new File(filePath);
+
+        if (!dir.isDirectory()) {
+            if (dir.mkdir()) {
+                System.out.println("directory created");
+            } else {
+                System.out.println("directory not created");
+            }
+        }
+
+        if (!file.exists()) {
+            try {
+                if (file.createNewFile()) {
+                    System.out.println("file created");
+                } else {
+                    System.out.println("file not created");
+                }
+            } catch (IOException e) {
+                System.out.println("Failed to create file due to IOException");
+            }
+        }
+
         Response.introduction(); // Prints Introduction
 
         // List to store input text entered by user
         ArrayList<Task> tasks = new ArrayList<>();
         final int tasksLimit = 100;
 
-        // Takes input from console and echoes the input.
+        // Takes input from console
         // Unless the input is "bye"(caps insensitive), program will keep waiting for input.
         Scanner s = new Scanner(System.in);
         while (true) {
@@ -90,6 +117,7 @@ public class Rocket {
                     tasks.add(event);
                     Response.eventAdded(event, tasks.size());
                 }
+            // When input is to delete a task
             } else if (isDelete(input)) {
                 String index = input.substring(7);
                 if (isInteger(index)) {
