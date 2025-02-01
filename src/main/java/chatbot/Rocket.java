@@ -1,7 +1,7 @@
 package chatbot;
 
-import java.io.File;
-import java.io.IOException;
+import chatbot.chatbot.data.dataHandler;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -13,30 +13,7 @@ import static chatbot.ToDo.isTodo;
 
 public class Rocket {
     public static void main(String[] args) {
-        String directory = "src/main/java/chatbot/chatbot.data";
-        String filePath = directory + "/storage.txt";
-        File dir = new File(directory);
-        File file = new File(filePath);
-
-        if (!dir.isDirectory()) {
-            if (dir.mkdir()) {
-                System.out.println("directory created");
-            } else {
-                System.out.println("directory not created");
-            }
-        }
-
-        if (!file.exists()) {
-            try {
-                if (file.createNewFile()) {
-                    System.out.println("file created");
-                } else {
-                    System.out.println("file not created");
-                }
-            } catch (IOException e) {
-                System.out.println("Failed to create file due to IOException");
-            }
-        }
+        dataHandler.createStorageFile();
 
         Response.introduction(); // Prints Introduction
 
