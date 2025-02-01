@@ -13,7 +13,7 @@ import static chatbot.ToDo.isTodo;
 
 public class Rocket {
     public static void main(String[] args) {
-        dataHandler.createStorageFile();
+        dataHandler.createListFile(); // Creates list file if it does not exist
 
         Response.introduction(); // Prints Introduction
 
@@ -32,11 +32,12 @@ public class Rocket {
                 break;
             // When input equals "list" (Case insensitive)
             } else if (input.equalsIgnoreCase("list")) {
-                if (tasks.isEmpty()) {
-                    Response.emptyList();
-                } else {
-                    Response.printListItems(tasks);
-                }
+                dataHandler.readList();
+//                if (tasks.isEmpty()) {
+//                    Response.emptyList();
+//                } else {
+//                    Response.printListItems(tasks);
+//                }
             // When input is blank
             } else if (input.isBlank()) {
                 Response.addEmptyTask();
@@ -71,6 +72,7 @@ public class Rocket {
                 } else {
                     ToDo todo = new ToDo(taskName.trim());
                     tasks.add(todo);
+                    dataHandler.addTodo(todo);
                     Response.todoAdded(todo, tasks.size());
                 }
             // When input is add deadline task

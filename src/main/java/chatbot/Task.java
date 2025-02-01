@@ -32,6 +32,9 @@ public class Task {
                 && isInteger(input.substring(7));
     }
 
+    public String getName() {
+        return this.taskName;
+    }
 
     @Override
     public String toString() {
