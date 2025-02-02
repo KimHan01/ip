@@ -1,11 +1,15 @@
 package chatbot.chatbot.data;
 
+import chatbot.Deadline;
+import chatbot.Event;
 import chatbot.Task;
+import chatbot.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class dataHandler {
@@ -36,11 +40,28 @@ public class dataHandler {
         }
     }
     // Read tasks from list.txt
-    public static void readList() {
+    public static void readList(ArrayList<Task> list) {
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-                System.out.println(sc.nextLine());
+                // Updates the list with the list of tasks
+                String[] parts = sc.nextLine().split("\\|", 2);
+                String header = parts[0];
+                String body = parts[1];
+                switch (header) {
+                    case "T":
+                        Todo todo = Todo.fromTxt(body);
+                        list.add(todo);
+                        break;
+                    case "D":
+                        Deadline deadline = Deadline.fromTxt(body);
+                        list.add(deadline);
+                        break;
+                    case "E":
+                        Event event = Event.fromTxt(body);
+                        list.add(event);
+                        break;
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -48,15 +69,38 @@ public class dataHandler {
     }
 
     // Add task (Todo) -> Write to txt file
-    public static void addTodo(Task todo) {
+    public static void addTodo(Todo todo) {
         try {
             FileWriter writer = new FileWriter(filePath, true);
-            writer.write("T|0|" + todo.getName() + "\n");
+            writer.write(todo.toTxt());
             writer.close();
         } catch (IOException e){
             e.printStackTrace();
         }
     }
+
+    // Add task (Deadline) -> Write
+    public static void addDeadline(Deadline deadline) {
+        try {
+            FileWriter writer = new FileWriter(filePath, true);
+            writer.write(deadline.toTxt());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Add task (Event) -> Write
+    public static void addEvent(Event event) {
+        try {
+            FileWriter writer = new FileWriter(filePath, true);
+            writer.write(event.toTxt());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     // Delete task -> Delete from txt file
 
     // Edit task -> Edit the txt file

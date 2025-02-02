@@ -9,7 +9,7 @@ import static chatbot.Deadline.isDeadline;
 import static chatbot.Event.isEvent;
 import static chatbot.Task.isMark;
 import static chatbot.Task.isUnmark;
-import static chatbot.ToDo.isTodo;
+import static chatbot.Todo.isTodo;
 
 public class Rocket {
     public static void main(String[] args) {
@@ -32,12 +32,14 @@ public class Rocket {
                 break;
             // When input equals "list" (Case insensitive)
             } else if (input.equalsIgnoreCase("list")) {
-                dataHandler.readList();
-//                if (tasks.isEmpty()) {
-//                    Response.emptyList();
-//                } else {
-//                    Response.printListItems(tasks);
-//                }
+                // updates task list
+                tasks = new ArrayList<>();
+                dataHandler.readList(tasks);
+                if (tasks.isEmpty()) {
+                    Response.emptyList();
+                } else {
+                    Response.printListItems(tasks);
+                }
             // When input is blank
             } else if (input.isBlank()) {
                 Response.addEmptyTask();
@@ -70,7 +72,7 @@ public class Rocket {
                 if (taskName.isBlank()) {
                     Response.addEmptyTask();
                 } else {
-                    ToDo todo = new ToDo(taskName.trim());
+                    Todo todo = new Todo(taskName.trim(), false);
                     tasks.add(todo);
                     dataHandler.addTodo(todo);
                     Response.todoAdded(todo, tasks.size());
@@ -81,8 +83,9 @@ public class Rocket {
                 if (split[0].isBlank()) {
                     Response.addEmptyTask();
                 } else {
-                    Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
+                    Deadline deadline = new Deadline(split[0].trim(), false, split[1].trim());
                     tasks.add(deadline);
+                    dataHandler.addDeadline(deadline);
                     Response.deadlineAdded(deadline, tasks.size());
                 }
             // When input is add event task
@@ -92,8 +95,9 @@ public class Rocket {
                     Response.addEmptyTask();
                 } else {
                     String[] splitTo = splitBy[1].split("/to", 2);
-                    Event event = new Event(splitBy[0].trim(), splitTo[0].trim(), splitTo[1].trim());
+                    Event event = new Event(splitBy[0].trim(), false, splitTo[0].trim(), splitTo[1].trim());
                     tasks.add(event);
+                    dataHandler.addEvent(event);
                     Response.eventAdded(event, tasks.size());
                 }
             // When input is to delete a task

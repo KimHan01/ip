@@ -10,6 +10,11 @@ public class Task {
         this.taskName = taskName;
     }
 
+    public Task(String taskName, boolean mark) {
+        this.taskName = taskName;
+        this.isDone = mark;
+    }
+
     public void markTask() {
         this.isDone = true;
     }
@@ -34,6 +39,10 @@ public class Task {
 
     public String getName() {
         return this.taskName;
+    }
+
+    public boolean getMark() {
+        return this.isDone;
     }
 
     @Override
