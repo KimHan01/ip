@@ -41,6 +41,7 @@ public class dataHandler {
             }
         }
     }
+
     // Read tasks from list.txt
     public static void readList(ArrayList<Task> list) {
         try {
@@ -84,8 +85,26 @@ public class dataHandler {
         }
     }
 
-    private static void replaceFile(File source, File dest) throws IOException {
-        Files.move(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    private static File writeToTemp(ArrayList<Task> list) {
+        String tempPath = directory + "/temp.txt";
+        File temp = new File(tempPath);
+        try {
+            if (!temp.createNewFile()) {
+                System.out.println("Failed to create temp file");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dataHandler.writeToTxt(tempPath, list);
+        return temp;
+    }
+
+    private static void replaceFile(File source, File dest) {
+        try {
+            Files.move(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // Add task of any type -> write
@@ -105,27 +124,29 @@ public class dataHandler {
         ArrayList<Task> list = new ArrayList<>();
         dataHandler.readList(list);
         list.remove(index);
-        String tempPath = directory + "/temp.txt";
-        File temp = new File(tempPath);
-        try {
-            if (!temp.createNewFile()) {
-                System.out.println("Failed to create temp file");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        dataHandler.writeToTxt(tempPath, list);
-        try {
-            dataHandler.replaceFile(temp, file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        File temp = writeToTemp(list);
+        dataHandler.replaceFile(temp, file);
     }
 
     // Edit task -> Edit the txt file. Reads line by line into a list of tasks, edit task at index.
     // Then, writes list of tasks into temp txt file, then replace list.txt with temp.txt
 
     // Mark task -> Mark the task as done in txt file. Same as edit task
-
+    public static void markTask(int index) {
+        ArrayList<Task> list = new ArrayList<>();
+        dataHandler.readList(list);
+        Task task = list.get(index);
+        task.markTask();
+        File temp = writeToTemp(list);
+        dataHandler.replaceFile(temp, file);
+    }
     // Unmark task. Same as edit task
+    public static void unmarkTask(int index) {
+        ArrayList<Task> list = new ArrayList<>();
+        dataHandler.readList(list);
+        Task task = list.get(index);
+        task.unmarkTask();
+        File temp = writeToTemp(list);
+        dataHandler.replaceFile(temp, file);
+    }
 }

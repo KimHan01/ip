@@ -54,6 +54,7 @@ public class Rocket {
                 } else {
                     Task taskToMark = tasks.get(taskNumToMark - 1);
                     taskToMark.markTask();
+                    dataHandler.markTask(taskNumToMark - 1);
                     Response.printMarkedTask(taskToMark);
                 }
             // When input is unmark task
@@ -64,6 +65,7 @@ public class Rocket {
                 } else {
                     Task taskToUnmark = tasks.get(taskNumToUnmark - 1);
                     taskToUnmark.unmarkTask();
+                    dataHandler.unmarkTask(taskNumToUnmark - 1);
                     Response.printUnmarkedTask(taskToUnmark);
                 }
             // When input is add todo task
