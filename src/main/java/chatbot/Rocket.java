@@ -107,6 +107,7 @@ public class Rocket {
                     int intIndex = Integer.parseInt(index) - 1;
                     if (intIndex >= 0 && intIndex < tasks.size()) {
                         Task removedTask = tasks.remove(intIndex);
+                        dataHandler.deleteTask(intIndex);
                         Response.taskRemoved(removedTask, tasks.size());
                     } else {
                         Response.removeUnexistingTask();

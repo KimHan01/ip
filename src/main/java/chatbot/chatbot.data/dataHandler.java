@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -63,9 +65,27 @@ public class dataHandler {
                         break;
                 }
             }
+            sc.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    // Writes a list of tasks into a txt file
+    private static void writeToTxt(String filePath, ArrayList<Task> list) {
+        try {
+            FileWriter writer = new FileWriter(filePath, true);
+            for (Task task : list) {
+                writer.write(task.toTxt());
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void replaceFile(File source, File dest) throws IOException {
+        Files.move(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
     // Add task of any type -> write
@@ -79,11 +99,33 @@ public class dataHandler {
         }
     }
 
-    // Delete task -> Delete from txt file
+    // Deletes task -> Delete from txt file. Reads line by line into a list of tasks, delete task at index.
+    // Then, writes list of tasks into temp txt file, then replaces list.txt with temp.txt
+    public static void deleteTask(int index) {
+        ArrayList<Task> list = new ArrayList<>();
+        dataHandler.readList(list);
+        list.remove(index);
+        String tempPath = directory + "/temp.txt";
+        File temp = new File(tempPath);
+        try {
+            if (!temp.createNewFile()) {
+                System.out.println("Failed to create temp file");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dataHandler.writeToTxt(tempPath, list);
+        try {
+            dataHandler.replaceFile(temp, file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    // Edit task -> Edit the txt file
+    // Edit task -> Edit the txt file. Reads line by line into a list of tasks, edit task at index.
+    // Then, writes list of tasks into temp txt file, then replace list.txt with temp.txt
 
-    // Mark task -> Mark the task as done in txt file
+    // Mark task -> Mark the task as done in txt file. Same as edit task
 
-    // Unmark task
+    // Unmark task. Same as edit task
 }
