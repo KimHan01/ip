@@ -12,6 +12,7 @@ public class Todo extends Task {
     }
 
     // Format: T|0/1|NAME, returns String representation in txt file
+    @Override
     public String toTxt() {
         String mark = super.getMark() ? "1" : "0";
         return "T|" + mark + "|" + super.getName() + "\n";

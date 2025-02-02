@@ -2,13 +2,9 @@ package chatbot;
 
 import static chatbot.Rocket.isInteger;
 
-public class Task {
+public abstract class Task {
     private String taskName;
     private boolean isDone = false;
-
-    public Task(String taskName) {
-        this.taskName = taskName;
-    }
 
     public Task(String taskName, boolean mark) {
         this.taskName = taskName;
@@ -44,6 +40,8 @@ public class Task {
     public boolean getMark() {
         return this.isDone;
     }
+
+    public abstract String toTxt();
 
     @Override
     public String toString() {

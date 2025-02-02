@@ -74,7 +74,7 @@ public class Rocket {
                 } else {
                     Todo todo = new Todo(taskName.trim(), false);
                     tasks.add(todo);
-                    dataHandler.addTodo(todo);
+                    dataHandler.addTask(todo);
                     Response.todoAdded(todo, tasks.size());
                 }
             // When input is add deadline task
@@ -85,7 +85,7 @@ public class Rocket {
                 } else {
                     Deadline deadline = new Deadline(split[0].trim(), false, split[1].trim());
                     tasks.add(deadline);
-                    dataHandler.addDeadline(deadline);
+                    dataHandler.addTask(deadline);
                     Response.deadlineAdded(deadline, tasks.size());
                 }
             // When input is add event task
@@ -97,7 +97,7 @@ public class Rocket {
                     String[] splitTo = splitBy[1].split("/to", 2);
                     Event event = new Event(splitBy[0].trim(), false, splitTo[0].trim(), splitTo[1].trim());
                     tasks.add(event);
-                    dataHandler.addEvent(event);
+                    dataHandler.addTask(event);
                     Response.eventAdded(event, tasks.size());
                 }
             // When input is to delete a task

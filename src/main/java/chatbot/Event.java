@@ -21,6 +21,7 @@ public class Event extends Task{
     }
 
     // Format: E|0/1|NAME|FROM|TO
+    @Override
     public String toTxt() {
         String mark = super.getMark() ? "1" : "0";
         return "E|" + mark + "|" + super.getName() + "|" + this.from + "|" + this.to + "\n";

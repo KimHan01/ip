@@ -16,6 +16,7 @@ public class Deadline extends Task{
     }
 
     // Format: D|0/1|NAME|BY
+    @Override
     public String toTxt() {
         String mark = super.getMark() ? "1" : "0";
         return "D|" + mark + "|" + super.getName() + "|" + this.by + "\n";

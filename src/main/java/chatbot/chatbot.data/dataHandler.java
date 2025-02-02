@@ -68,33 +68,11 @@ public class dataHandler {
         }
     }
 
-    // Add task (Todo) -> Write to txt file
-    public static void addTodo(Todo todo) {
+    // Add task of any type -> write
+    public static void addTask(Task task) {
         try {
             FileWriter writer = new FileWriter(filePath, true);
-            writer.write(todo.toTxt());
-            writer.close();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    // Add task (Deadline) -> Write
-    public static void addDeadline(Deadline deadline) {
-        try {
-            FileWriter writer = new FileWriter(filePath, true);
-            writer.write(deadline.toTxt());
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Add task (Event) -> Write
-    public static void addEvent(Event event) {
-        try {
-            FileWriter writer = new FileWriter(filePath, true);
-            writer.write(event.toTxt());
+            writer.write(task.toTxt());
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -106,4 +84,6 @@ public class dataHandler {
     // Edit task -> Edit the txt file
 
     // Mark task -> Mark the task as done in txt file
+
+    // Unmark task
 }
