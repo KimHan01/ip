@@ -118,34 +118,8 @@ public class dataHandler {
         }
     }
 
-    // Deletes task -> Delete from txt file. Reads line by line into a list of tasks, delete task at index.
-    // Then, writes list of tasks into temp txt file, then replaces list.txt with temp.txt
-    public static void deleteTask(int index) {
-        ArrayList<Task> list = new ArrayList<>();
-        dataHandler.readList(list);
-        list.remove(index);
-        File temp = writeToTemp(list);
-        dataHandler.replaceFile(temp, file);
-    }
-
-    // Edit task -> Edit the txt file. Reads line by line into a list of tasks, edit task at index.
-    // Then, writes list of tasks into temp txt file, then replace list.txt with temp.txt
-
-    // Mark task -> Mark the task as done in txt file. Same as edit task
-    public static void markTask(int index) {
-        ArrayList<Task> list = new ArrayList<>();
-        dataHandler.readList(list);
-        Task task = list.get(index);
-        task.markTask();
-        File temp = writeToTemp(list);
-        dataHandler.replaceFile(temp, file);
-    }
-    // Unmark task. Same as edit task
-    public static void unmarkTask(int index) {
-        ArrayList<Task> list = new ArrayList<>();
-        dataHandler.readList(list);
-        Task task = list.get(index);
-        task.unmarkTask();
+    // Updates list.txt with task list. Writes task list into temp.txt file and replaces list.txt with temp.txt
+    public static void updateList(ArrayList<Task> list) {
         File temp = writeToTemp(list);
         dataHandler.replaceFile(temp, file);
     }

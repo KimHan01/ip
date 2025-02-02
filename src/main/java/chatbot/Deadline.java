@@ -9,12 +9,6 @@ public class Deadline extends Task{
         this.by = by;
     }
 
-    public static boolean isDeadline(String input) {
-        return input.length() > 9
-                && input.substring(0, 8).equalsIgnoreCase("deadline")
-                && input.substring(8, 9).isBlank();
-    }
-
     // Format: D|0/1|NAME|BY
     @Override
     public String toTxt() {

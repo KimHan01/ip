@@ -19,20 +19,6 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public static boolean isMark(String input) {
-        return input.length() > 5
-                && input.substring(0, 4).equalsIgnoreCase("mark")
-                && input.substring(4, 5).isBlank()
-                && isInteger(input.substring(5));
-    }
-
-    public static boolean isUnmark(String input) {
-        return input.length() > 7
-                && input.substring(0, 6).equalsIgnoreCase("unmark")
-                && input.substring(6, 7).isBlank()
-                && isInteger(input.substring(7));
-    }
-
     public String getName() {
         return this.taskName;
     }

@@ -5,12 +5,6 @@ public class Todo extends Task {
         super(taskName, mark);
     }
 
-    public static boolean isTodo(String input) {
-        return input.length() > 5
-                && input.substring(0, 4).equalsIgnoreCase("todo")
-                && input.substring(4, 5).isBlank();
-    }
-
     // Format: T|0/1|NAME, returns String representation in txt file
     @Override
     public String toTxt() {

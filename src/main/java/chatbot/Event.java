@@ -10,11 +10,6 @@ public class Event extends Task{
         this.to = to;
     }
 
-    public static boolean isEvent(String input) {
-        return input.length() > 6
-                && input.substring(0, 5).equalsIgnoreCase("event")
-                && input.substring(5, 6).isBlank();
-    }
 
     public String getTo() {
         return this.to;
