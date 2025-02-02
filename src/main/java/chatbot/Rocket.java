@@ -1,23 +1,22 @@
 package chatbot;
 
+import chatbot.chatbot.data.dataHandler;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import static chatbot.Deadline.isDeadline;
-import static chatbot.Event.isEvent;
-import static chatbot.Task.isMark;
-import static chatbot.Task.isUnmark;
-import static chatbot.ToDo.isTodo;
-
 public class Rocket {
     public static void main(String[] args) {
+        dataHandler.createListFile(); // Creates list file if it does not exist
+
         Response.introduction(); // Prints Introduction
 
-        // List to store input text entered by user
+        // List to store user's list of tasks
         ArrayList<Task> tasks = new ArrayList<>();
+        dataHandler.readList(tasks);
         final int tasksLimit = 100;
 
-        // Takes input from console and echoes the input.
+        // Takes input from console
         // Unless the input is "bye"(caps insensitive), program will keep waiting for input.
         Scanner s = new Scanner(System.in);
         while (true) {
@@ -28,6 +27,9 @@ public class Rocket {
                 break;
             // When input equals "list" (Case insensitive)
             } else if (input.equalsIgnoreCase("list")) {
+                // updates task list by clearing the list and then reading list from dataHandler
+                tasks.clear();
+                dataHandler.readList(tasks);
                 if (tasks.isEmpty()) {
                     Response.emptyList();
                 } else {
@@ -47,6 +49,7 @@ public class Rocket {
                 } else {
                     Task taskToMark = tasks.get(taskNumToMark - 1);
                     taskToMark.markTask();
+                    dataHandler.updateList(tasks);
                     Response.printMarkedTask(taskToMark);
                 }
             // When input is unmark task
@@ -57,6 +60,7 @@ public class Rocket {
                 } else {
                     Task taskToUnmark = tasks.get(taskNumToUnmark - 1);
                     taskToUnmark.unmarkTask();
+                    dataHandler.updateList(tasks);
                     Response.printUnmarkedTask(taskToUnmark);
                 }
             // When input is add todo task
@@ -65,37 +69,50 @@ public class Rocket {
                 if (taskName.isBlank()) {
                     Response.addEmptyTask();
                 } else {
-                    ToDo todo = new ToDo(taskName.trim());
+                    Todo todo = new Todo(taskName.trim(), false);
                     tasks.add(todo);
+                    dataHandler.addTask(todo);
                     Response.todoAdded(todo, tasks.size());
                 }
             // When input is add deadline task
             } else if (isDeadline(input)) {
-                String[] split = input.substring(9).split("/by", 2);
-                if (split[0].isBlank()) {
+                String[] parts = input.substring(9).split("/by", 0);
+                if (parts[0].isBlank()) {
                     Response.addEmptyTask();
+                } else if (parts.length != 2) {
+                    Response.invalidInput();
                 } else {
-                    Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
+                    Deadline deadline = new Deadline(parts[0].trim(), false, parts[1].trim());
                     tasks.add(deadline);
+                    dataHandler.addTask(deadline);
                     Response.deadlineAdded(deadline, tasks.size());
                 }
             // When input is add event task
             } else if (isEvent(input)) {
-                String[] splitBy = input.substring(6).split("/from", 2);
-                if (splitBy[0].isBlank()) {
+                String[] splitFrom = input.substring(6).split("/from", 0);
+                if (splitFrom[0].isBlank()) {
                     Response.addEmptyTask();
+                } else if (splitFrom.length != 2) {
+                    Response.invalidInput();
                 } else {
-                    String[] splitTo = splitBy[1].split("/to", 2);
-                    Event event = new Event(splitBy[0].trim(), splitTo[0].trim(), splitTo[1].trim());
-                    tasks.add(event);
-                    Response.eventAdded(event, tasks.size());
+                    String[] splitTo = splitFrom[1].split("/to", 0);
+                    if (splitTo.length != 2) {
+                        Response.invalidInput();
+                    } else {
+                        Event event = new Event(splitFrom[0].trim(), false, splitTo[0].trim(), splitTo[1].trim());
+                        tasks.add(event);
+                        dataHandler.addTask(event);
+                        Response.eventAdded(event, tasks.size());
+                    }
                 }
+            // When input is to delete a task
             } else if (isDelete(input)) {
                 String index = input.substring(7);
                 if (isInteger(index)) {
                     int intIndex = Integer.parseInt(index) - 1;
                     if (intIndex >= 0 && intIndex < tasks.size()) {
                         Task removedTask = tasks.remove(intIndex);
+                        dataHandler.updateList(tasks);
                         Response.taskRemoved(removedTask, tasks.size());
                     } else {
                         Response.removeUnexistingTask();
@@ -114,6 +131,38 @@ public class Rocket {
                 }
             }
         }
+    }
+
+    public static boolean isTodo(String input) {
+        return input.length() > 5
+                && input.substring(0, 4).equalsIgnoreCase("todo")
+                && input.substring(4, 5).isBlank();
+    }
+
+    public static boolean isDeadline(String input) {
+        return input.length() > 9
+                && input.substring(0, 8).equalsIgnoreCase("deadline")
+                && input.substring(8, 9).isBlank();
+    }
+
+    public static boolean isEvent(String input) {
+        return input.length() > 6
+                && input.substring(0, 5).equalsIgnoreCase("event")
+                && input.substring(5, 6).isBlank();
+    }
+
+    public static boolean isMark(String input) {
+        return input.length() > 5
+                && input.substring(0, 4).equalsIgnoreCase("mark")
+                && input.substring(4, 5).isBlank()
+                && isInteger(input.substring(5));
+    }
+
+    public static boolean isUnmark(String input) {
+        return input.length() > 7
+                && input.substring(0, 6).equalsIgnoreCase("unmark")
+                && input.substring(6, 7).isBlank()
+                && isInteger(input.substring(7));
     }
 
     private static boolean isDelete(String input) {

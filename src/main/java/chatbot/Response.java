@@ -83,7 +83,7 @@ public class Response {
     }
 
     // Response to successfully adding a todo
-    public static void todoAdded(ToDo todo, int listSize) {
+    public static void todoAdded(Todo todo, int listSize) {
         System.out.println(line + "Successfully added ToDo:\n"
                 + todo.toString() + "\n"
                 + "Now you have " + listSize + " tasks in the list\n" + line);
