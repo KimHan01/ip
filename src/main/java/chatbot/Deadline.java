@@ -1,38 +1,37 @@
 package chatbot;
 
-public class Deadline extends Task{
-    private String by;
+import java.time.LocalDate;
 
-    // Input format is deadline <TaskName> /by <Date>
-    public Deadline(String taskName, boolean mark, String by) {
+public class Deadline extends Task{
+    private LocalDate by;
+    private String DateTimeOutput;
+
+    // Input format is deadline <TaskName> /by <Date>,
+    // <Date> format from argument should be "yyyy-MM-dd HHmm"
+    public Deadline(String taskName, boolean mark, LocalDate by) {
         super(taskName, mark);
         this.by = by;
+        this.DateTimeOutput = CustomDateFormatter.formatOutput(by);
     }
 
-    // Format: D|0/1|NAME|BY
+    // Format: D|0/1|NAME|BY, converting BY into output format
     @Override
     public String toTxt() {
         String mark = super.getMark() ? "1" : "0";
-        return "D|" + mark + "|" + super.getName() + "|" + this.by + "\n";
+        return "D|" + mark + "|" + super.getName() + "|" + DateTimeOutput + "\n";
     }
 
-    // Format: 0/1|NAME|BY
-    public static Deadline fromTxt(String body) {
-        try {
-            String[] parts = body.split("\\|");
-            boolean mark = parts[0].equals("1");
-            String name = parts[1];
-            String by = parts[2];
-            return new Deadline(name, mark, by);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("ArrayIndexOutOfBoundsException when calling fromTxt for Deadline class, " +
-                    "returning Deadline with name: invalid");
-            return new Deadline("invalid", false, "-");
-        }
+    // Format: 0/1|NAME|BY, converts BY from output format into LocalDateTime
+    public static Deadline fromTxt(String body) throws ArrayIndexOutOfBoundsException {
+        String[] parts = body.split("\\|");
+        boolean mark = parts[0].equals("1");
+        String name = parts[1];
+        String by = parts[2];
+        return new Deadline(name, mark, CustomDateFormatter.dateFromOutputFormat(by));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + DateTimeOutput + ")";
     }
 }

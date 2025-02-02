@@ -2,6 +2,8 @@ package chatbot;
 
 import chatbot.chatbot.data.dataHandler;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -82,10 +84,15 @@ public class Rocket {
                 } else if (parts.length != 2) {
                     Response.invalidInput();
                 } else {
-                    Deadline deadline = new Deadline(parts[0].trim(), false, parts[1].trim());
-                    tasks.add(deadline);
-                    dataHandler.addTask(deadline);
-                    Response.deadlineAdded(deadline, tasks.size());
+                    try {
+                        LocalDate dateTime = CustomDateFormatter.dateFromInputFormat(parts[1].trim());
+                        Deadline deadline = new Deadline(parts[0].trim(), false, dateTime);
+                        tasks.add(deadline);
+                        dataHandler.addTask(deadline);
+                        Response.deadlineAdded(deadline, tasks.size());
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid Date Time input format. Please use yyyy-MM-dd.");
+                    }
                 }
             // When input is add event task
             } else if (isEvent(input)) {
@@ -99,10 +106,16 @@ public class Rocket {
                     if (splitTo.length != 2) {
                         Response.invalidInput();
                     } else {
-                        Event event = new Event(splitFrom[0].trim(), false, splitTo[0].trim(), splitTo[1].trim());
-                        tasks.add(event);
-                        dataHandler.addTask(event);
-                        Response.eventAdded(event, tasks.size());
+                        try {
+                            LocalDate to = CustomDateFormatter.dateFromInputFormat(splitTo[0].trim());
+                            LocalDate from = CustomDateFormatter.dateFromInputFormat(splitTo[1].trim());
+                            Event event = new Event(splitFrom[0].trim(), false, to, from);
+                            tasks.add(event);
+                            dataHandler.addTask(event);
+                            Response.eventAdded(event, tasks.size());
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Invalid Date Time input format. Please use yyyy-MM-dd.");
+                        }
                     }
                 }
             // When input is to delete a task
