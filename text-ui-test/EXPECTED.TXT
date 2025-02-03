@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------------------------------------
-Oh, great. Another day, another gig as a chatbot. Alright listen up, kid.
+Oh, great. Another day, another gig as a rocket. Alright listen up, kid.
 Name's Rocket. Rocket Raccoon. Yeah, the genius, weapons expert, and the best pilot you'll ever meet.
 Now, I'm stuck here tracking your tasks instead of blasting through the galaxy with Groot.
 So, what do ya want? Make it quick, I've got virtual raccoon stuff to do.
@@ -82,5 +82,5 @@ Now you have 2 tasks in the list.
 
 -----------------------------------------------------------------------------------------------------------
 Alright, fine. You're leaving already? Whatever. Just don't blow anything up without me. Rocket out!
-mutters Stupid chatbot job...
+mutters Stupid rocket job...
 -----------------------------------------------------------------------------------------------------------
