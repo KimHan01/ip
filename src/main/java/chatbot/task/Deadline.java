@@ -1,10 +1,13 @@
-package chatbot;
+package chatbot.task;
+
+import chatbot.CustomDateFormatter;
+import chatbot.TaskType;
 
 import java.time.LocalDate;
 
-public class Deadline extends Task{
-    private LocalDate by;
-    private String DateTimeOutput;
+public class Deadline extends Task {
+    private final LocalDate by;
+    private final String DateTimeOutput;
 
     // Input format is deadline <TaskName> /by <Date>,
     // <Date> format from argument should be "yyyy-MM-dd HHmm"
@@ -14,11 +17,22 @@ public class Deadline extends Task{
         this.DateTimeOutput = CustomDateFormatter.formatOutput(by);
     }
 
+
     // Format: D|0/1|NAME|BY, converting BY into output format
     @Override
     public String toTxt() {
         String mark = super.getMark() ? "1" : "0";
         return "D|" + mark + "|" + super.getName() + "|" + DateTimeOutput + "\n";
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.DEADLINE;
+    }
+
+    @Override
+    public LocalDate getBy() {
+        return this.by;
     }
 
     // Format: 0/1|NAME|BY, converts BY from output format into LocalDateTime

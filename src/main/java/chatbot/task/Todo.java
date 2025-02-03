@@ -1,4 +1,6 @@
-package chatbot;
+package chatbot.task;
+
+import chatbot.TaskType;
 
 public class Todo extends Task {
     public Todo(String taskName, boolean mark) {
@@ -10,6 +12,11 @@ public class Todo extends Task {
     public String toTxt() {
         String mark = super.getMark() ? "1" : "0";
         return "T|" + mark + "|" + super.getName() + "\n";
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.TODO;
     }
 
     // Returns Todo object from txt line, takes in txt String body without header (Format: 0/1|NAME)

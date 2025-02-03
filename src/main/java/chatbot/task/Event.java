@@ -1,12 +1,15 @@
-package chatbot;
+package chatbot.task;
+
+import chatbot.CustomDateFormatter;
+import chatbot.TaskType;
 
 import java.time.LocalDate;
 
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate from;
     private LocalDate to;
-    private String fromOutput; // Formatted output string of from
-    private String toOutput; // Formatted output string of to
+    private final String fromOutput; // Formatted output string of from
+    private final String toOutput; // Formatted output string of to
 
     public Event(String taskName, boolean mark, LocalDate from, LocalDate to) {
         super(taskName, mark);
@@ -21,6 +24,21 @@ public class Event extends Task{
     public String toTxt() {
         String mark = super.getMark() ? "1" : "0";
         return "E|" + mark + "|" + super.getName() + "|" + fromOutput + "|" + toOutput + "\n";
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.EVENT;
+    }
+
+    @Override
+    public LocalDate getFrom() {
+        return this.from;
+    }
+
+    @Override
+    public LocalDate getTo() {
+        return this.to;
     }
 
     // Format: 0/1|NAME|FROM|TO

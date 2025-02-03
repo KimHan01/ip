@@ -1,0 +1,5 @@
+package chatbot;
+
+public enum TaskType {
+    TODO, DEADLINE, EVENT
+}

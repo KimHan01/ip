@@ -1,9 +1,10 @@
-package chatbot.chatbot.data;
+package chatbot.chatbot.storage;
 
-import chatbot.Deadline;
-import chatbot.Event;
-import chatbot.Task;
-import chatbot.Todo;
+import chatbot.*;
+import chatbot.task.Deadline;
+import chatbot.task.Event;
+import chatbot.task.Task;
+import chatbot.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,13 +15,19 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class dataHandler {
-    final static String directory = "src/main/java/chatbot/chatbot.data";
-    final static String filePath = directory + "/list.txt";
-    static File dir = new File(directory);
-    static File file = new File(filePath);
+public class Storage {
+    private final String filePath;
+    private final File file;
+    private final File dir;
 
-    public static void createListFile() {
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        this.file = new File(filePath);
+        this.dir = file.getParentFile();
+        createFilePath(filePath); // Creates file if it does not exist
+    }
+
+    public void createFilePath(String filePath) {
         if (!dir.isDirectory()) {
             if (dir.mkdir()) {
                 System.out.println("Created directory");
@@ -42,41 +49,39 @@ public class dataHandler {
         }
     }
 
-    // Read tasks from list.txt
-    public static void readList(ArrayList<Task> list) {
-        try {
-            Scanner sc = new Scanner(file);
-            while (sc.hasNext()) {
-                // Updates the list with the list of tasks
-                String[] parts = sc.nextLine().split("\\|", 2);
-                String header = parts[0];
-                String body = parts[1];
-                switch (header) {
-                    case "T":
-                        Todo todo = Todo.fromTxt(body);
-                        list.add(todo);
-                        break;
-                    case "D":
-                        Deadline deadline = Deadline.fromTxt(body);
-                        list.add(deadline);
-                        break;
-                    case "E":
-                        Event event = Event.fromTxt(body);
-                        list.add(event);
-                        break;
-                }
+    // Returns ArrayList from storage file,
+    // used as argument for constructor of TaskList class
+    public ArrayList<Task> load() throws FileNotFoundException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        Scanner sc = new Scanner(file);
+        while (sc.hasNext()) {
+            String[] parts = sc.nextLine().split("\\|", 2);
+            String header = parts[0];
+            String body = parts[1];
+            switch (header) {
+                case "T":
+                    Todo todo = Todo.fromTxt(body);
+                    tasks.add(todo);
+                    break;
+                case "D":
+                    Deadline deadline = Deadline.fromTxt(body);
+                    tasks.add(deadline);
+                    break;
+                case "E":
+                    Event event = Event.fromTxt(body);
+                    tasks.add(event);
+                    break;
             }
-            sc.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
+        sc.close();
+        return tasks;
     }
 
     // Writes a list of tasks into a txt file
-    private static void writeToTxt(String filePath, ArrayList<Task> list) {
+    private void writeToStorage(TaskList list) {
         try {
             FileWriter writer = new FileWriter(filePath, true);
-            for (Task task : list) {
+            for (Task task : list.getTasks()) {
                 writer.write(task.toTxt());
             }
             writer.close();
@@ -85,8 +90,8 @@ public class dataHandler {
         }
     }
 
-    private static File writeToTemp(ArrayList<Task> list) {
-        String tempPath = directory + "/temp.txt";
+    private File writeToTemp(TaskList list) {
+        String tempPath = dir.getPath() + "/temp.txt";
         File temp = new File(tempPath);
         try {
             if (!temp.createNewFile()) {
@@ -95,7 +100,7 @@ public class dataHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dataHandler.writeToTxt(tempPath, list);
+        writeToStorage(list);
         return temp;
     }
 
@@ -108,7 +113,7 @@ public class dataHandler {
     }
 
     // Add task of any type -> write
-    public static void addTask(Task task) {
+    public void addTask(Task task) {
         try {
             FileWriter writer = new FileWriter(filePath, true);
             writer.write(task.toTxt());
@@ -118,9 +123,9 @@ public class dataHandler {
         }
     }
 
-    // Updates list.txt with task list. Writes task list into temp.txt file and replaces list.txt with temp.txt
-    public static void updateList(ArrayList<Task> list) {
+    // Updates storage file with task list.
+    public void updateStorage(TaskList list) {
         File temp = writeToTemp(list);
-        dataHandler.replaceFile(temp, file);
+        Storage.replaceFile(temp, file);
     }
 }

@@ -1,9 +1,11 @@
-package chatbot;
+package chatbot.task;
 
-import static chatbot.Rocket.isInteger;
+import chatbot.TaskType;
+
+import java.time.LocalDate;
 
 public abstract class Task {
-    private String taskName;
+    private final String taskName;
     private boolean isDone = false;
 
     public Task(String taskName, boolean mark) {
@@ -28,6 +30,20 @@ public abstract class Task {
     }
 
     public abstract String toTxt();
+
+    public abstract TaskType getType();
+
+    public LocalDate getBy() {
+        throw new UnsupportedOperationException("This method is not supported for this class");
+    }
+
+    public LocalDate getFrom() {
+        throw new UnsupportedOperationException("This method is not supported for this class");
+    }
+
+    public LocalDate getTo() {
+        throw new UnsupportedOperationException("This method is not supported for this class");
+    }
 
     @Override
     public String toString() {
