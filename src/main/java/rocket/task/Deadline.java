@@ -16,7 +16,6 @@ public class Deadline extends Task {
         this.DateTimeOutput = CustomDateFormatter.formatOutput(by);
     }
 
-
     // Format: D|0/1|NAME|BY, converting BY into output format
     @Override
     public String toTxt() {
@@ -36,10 +35,12 @@ public class Deadline extends Task {
 
     // Format: 0/1|NAME|BY, converts BY from output format into LocalDateTime
     public static Deadline fromTxt(String body) throws ArrayIndexOutOfBoundsException {
-        String[] parts = body.split("\\|");
+        String[] parts = body.split("\\|", 2);
         boolean mark = parts[0].equals("1");
-        String name = parts[1];
-        String by = parts[2];
+        String nameAndBy = parts[1];
+        int index = nameAndBy.lastIndexOf("|");
+        String name = nameAndBy.substring(0, index);
+        String by = nameAndBy.substring(index + 1);
         return new Deadline(name, mark, CustomDateFormatter.dateFromOutputFormat(by));
     }
 

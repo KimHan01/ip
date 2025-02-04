@@ -18,17 +18,11 @@ public class Todo extends Task {
     }
 
     // Returns Todo object from txt line, takes in txt String body without header (Format: 0/1|NAME)
-    public static Todo fromTxt(String body) {
-        try {
-            String[] parts = body.split("\\|");
-            boolean mark = parts[0].equals("1");
-            String name = parts[1];
-            return new Todo(name, mark);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("ArrayIndexOutOfBoundsException when calling fromTxt for Todo class, " +
-                    "returning todo with name: invalid");
-            return new Todo("invalid", false);
-        }
+    public static Todo fromTxt(String body) throws ArrayIndexOutOfBoundsException {
+        String[] parts = body.split("\\|", 2); // Split once
+        boolean mark = parts[0].equals("1");
+        String name = parts[1];
+        return new Todo(name, mark);
     }
 
     @Override

@@ -54,19 +54,23 @@ public class Storage {
             String[] parts = sc.nextLine().split("\\|", 2);
             String header = parts[0];
             String body = parts[1];
-            switch (header) {
-                case "T":
-                    Todo todo = Todo.fromTxt(body);
-                    tasks.add(todo);
-                    break;
-                case "D":
-                    Deadline deadline = Deadline.fromTxt(body);
-                    tasks.add(deadline);
-                    break;
-                case "E":
-                    Event event = Event.fromTxt(body);
-                    tasks.add(event);
-                    break;
+            try {
+                switch (header) {
+                    case "T":
+                        Todo todo = Todo.fromTxt(body);
+                        tasks.add(todo);
+                        break;
+                    case "D":
+                        Deadline deadline = Deadline.fromTxt(body);
+                        tasks.add(deadline);
+                        break;
+                    case "E":
+                        Event event = Event.fromTxt(body);
+                        tasks.add(event);
+                        break;
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Error loading from storage file due to incorrect format");
             }
         }
         sc.close();
