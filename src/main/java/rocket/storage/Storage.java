@@ -35,9 +35,9 @@ public class Storage {
         if (!file.exists()) {
             try {
                 if (file.createNewFile()) {
-                    System.out.println("Created list file");
+                    System.out.println("Created storage file");
                 } else {
-                    System.out.println("Failed to create list file");
+                    System.out.println("Failed to create storage file");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -92,12 +92,9 @@ public class Storage {
 
     private File writeToTemp(TaskList list) {
         String tempPath = dir.getPath() + "/temp.txt";
-        System.out.println(tempPath);
         File temp = new File(tempPath);
         try {
-            if (temp.createNewFile()) {
-                System.out.println("Created temp file");
-            } else {
+            if (!temp.createNewFile()) {
                 System.out.println("Failed to create temp file");
             }
         } catch (IOException e) {
