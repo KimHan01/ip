@@ -36,7 +36,7 @@ public class Rocket {
     }
 
     public static void main(String[] args) {
-        String filePath = "src/main/java/rocket/storage/storage.txt";
+        String filePath = "./data/storage.txt";
         new Rocket(filePath).run();
     }
 }

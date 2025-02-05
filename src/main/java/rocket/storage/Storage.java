@@ -26,7 +26,7 @@ public class Storage {
     public void createFilePath(String filePath) {
         if (!dir.isDirectory()) {
             if (dir.mkdir()) {
-                System.out.println("Created directory");
+                System.out.println("Created directory (" + dir.getPath() + ")");
             } else {
                 System.out.println("Failed to create directory");
             }
@@ -35,7 +35,7 @@ public class Storage {
         if (!file.exists()) {
             try {
                 if (file.createNewFile()) {
-                    System.out.println("Created storage file");
+                    System.out.println("Created data file (" + file.getPath() + ")");
                 } else {
                     System.out.println("Failed to create storage file");
                 }
