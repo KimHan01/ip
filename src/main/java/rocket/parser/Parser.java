@@ -20,6 +20,7 @@ public class Parser {
     private static final String UNMARK = "unmark";
     private static final String EXIT = "bye";
     private static final String LIST = "list";
+    private static final String FIND = "find";
 
     // All commands: Add, Delete, Mark, Unmark, Exit, List
     public static Command parse(String input) {
@@ -79,6 +80,9 @@ public class Parser {
                 return new ExitCommand();
             case LIST:
                 return new ListCommand();
+            case FIND:
+                String keyword = input.substring(5);
+                return new FindCommand(keyword);
             default:
                 return new InvalidFormatCommand();
         }
@@ -101,6 +105,8 @@ public class Parser {
             return EXIT;
         } else if (isList(input)) {
             return LIST;
+        } else if (isFind(input)) {
+            return FIND;
         } else {
             return "invalid";
         }
@@ -141,6 +147,12 @@ public class Parser {
                 && input.substring(0, 6).equalsIgnoreCase(UNMARK)
                 && input.substring(6, 7).isBlank()
                 && Utils.isInteger(input.substring(7));
+    }
+
+    private static boolean isFind(String input) {
+        return input.length() > 5
+                && input.substring(0, 4).equalsIgnoreCase(FIND)
+                && input.substring(4, 5).isBlank();
     }
 
     private static boolean isExit(String input) {
