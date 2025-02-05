@@ -1,6 +1,7 @@
 package rocket.ui;
 
 import rocket.task.Task;
+import rocket.task.TaskList;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -71,12 +72,12 @@ public class Ui {
 
     // Response to "list" which prints out all items inside the list to the console
     public void readListItems(ArrayList<Task> list) {
-        System.out.print(LINE);
+        read(LINE);
         for (int i = 0; i < list.size(); i++) {
             int taskNum = i + 1;
-            System.out.println(taskNum + "." + list.get(i).toString());
+            read(taskNum + "." + list.get(i).toString());
         }
-        System.out.println(LINE);
+        read(LINE);
     }
 
     // Response to successfully marking a task
@@ -132,5 +133,14 @@ public class Ui {
     // Response to invalid date format
     public void readInvalidDateFormat() {
         read("Invalid date format given. Please use yyyy-mm-dd\n");
+    }
+
+    public void readFind(TaskList tasks) {
+        read(LINE + "Here are the matching tasks in your list:\n");
+        for (int i = 0; i < tasks.getSize(); i++) {
+            int taskNum = i + 1;
+            read(taskNum + "." + tasks.get(i).toString());
+        }
+        read(LINE);
     }
 }
