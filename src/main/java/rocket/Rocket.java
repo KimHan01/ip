@@ -8,11 +8,18 @@ import rocket.ui.Ui;
 
 import java.io.FileNotFoundException;
 
+/**
+ * The main class which represents the chatbot {@link Rocket}.
+ */
 public class Rocket {
     private Storage storage;
     private TaskList list;
     private Ui ui;
 
+    /**
+     * Constructor for {@link Rocket} class,
+     * creates a new {@code Rocket} chatbot with a given valid filePath
+     */
     public Rocket(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +31,9 @@ public class Rocket {
         }
     }
 
+    /**
+     * Runs the @{code Rocket} chatbot
+     */
     public void run() {
         ui.introduction();
         boolean isExit = false;
@@ -35,6 +45,9 @@ public class Rocket {
         }
     }
 
+    /**
+     * The entry point of the program
+     */
     public static void main(String[] args) {
         String filePath = "./data/storage.txt";
         new Rocket(filePath).run();
