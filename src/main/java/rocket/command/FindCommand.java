@@ -5,9 +5,15 @@ import rocket.task.Task;
 import rocket.task.TaskList;
 import rocket.ui.Ui;
 
+/**
+ * Represents a command to find tasks in the task list.
+ */
 public class FindCommand extends Command {
     String keyword;
 
+    /**
+     * Creates a new {@code FindCommand} with the given keyword to search for.
+     */
     public FindCommand(String keyword) {
         super(false);
         this.keyword = keyword;
