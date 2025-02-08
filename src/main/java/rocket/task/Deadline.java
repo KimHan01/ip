@@ -44,7 +44,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a {@code Deadline} object from a formatted String without its header("D|").
-     * @throws ArrayIndexOutOfBoundsException
+     * @throws ArrayIndexOutOfBoundsException if the input String is not formatted correctly
      */
     // Format: 0/1|NAME|BY, converts BY from output format into LocalDateTime
     public static Deadline fromTxt(String body) throws ArrayIndexOutOfBoundsException {

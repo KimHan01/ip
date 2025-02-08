@@ -52,7 +52,7 @@ public class Event extends Task {
 
     /**
      * Returns an {@code Event} object from a formatted String without its header("E|").
-     * @throws ArrayIndexOutOfBoundsException
+     * @throws ArrayIndexOutOfBoundsException if the input String is not formatted correctly
      */
     public static Event fromTxt(String body) throws ArrayIndexOutOfBoundsException{
         String[] parts = body.split("\\|");
