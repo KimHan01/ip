@@ -1,6 +1,10 @@
 package rocket.storage;
 
-import rocket.task.*;
+import rocket.task.Deadline;
+import rocket.task.Event;
+import rocket.task.Task;
+import rocket.task.TaskList;
+import rocket.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +20,6 @@ import java.util.Scanner;
  * Handles creating, reading and writing from storage file.
  */
 public class Storage {
-    private final String filePath;
     private final File file;
     private final File dir;
 
@@ -25,7 +28,6 @@ public class Storage {
      * Creates file at file path if it does not exist.
      */
     public Storage(String filePath) {
-        this.filePath = filePath;
         this.file = new File(filePath);
         this.dir = file.getParentFile();
         createFilePath(filePath); // Creates file if it does not exist
@@ -70,18 +72,18 @@ public class Storage {
             String body = parts[1];
             try {
                 switch (header) {
-                    case "T":
-                        Todo todo = Todo.fromTxt(body);
-                        tasks.add(todo);
-                        break;
-                    case "D":
-                        Deadline deadline = Deadline.fromTxt(body);
-                        tasks.add(deadline);
-                        break;
-                    case "E":
-                        Event event = Event.fromTxt(body);
-                        tasks.add(event);
-                        break;
+                case "T":
+                    Todo todo = Todo.fromTxt(body);
+                    tasks.add(todo);
+                    break;
+                case "D":
+                    Deadline deadline = Deadline.fromTxt(body);
+                    tasks.add(deadline);
+                    break;
+                case "E":
+                    Event event = Event.fromTxt(body);
+                    tasks.add(event);
+                    break;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Error loading from storage file due to incorrect format");

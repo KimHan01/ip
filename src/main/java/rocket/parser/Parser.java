@@ -1,15 +1,27 @@
 package rocket.parser;
 
-import rocket.formatter.CustomDateFormatter;
-import rocket.command.*;
-import rocket.common.Utils;
-import rocket.exception.EmptyTaskNameException;
 import rocket.task.Deadline;
 import rocket.task.Event;
 import rocket.task.Todo;
 
+import rocket.command.Command;
+import rocket.command.AddCommand;
+import rocket.command.DeleteCommand;
+import rocket.command.EmptyTaskNameCommand;
+import rocket.command.ExitCommand;
+import rocket.command.FindCommand;
+import rocket.command.InvalidFormatCommand;
+import rocket.command.InvalidDateCommand;
+import rocket.command.ListCommand;
+import rocket.command.MarkCommand;
+import rocket.command.UnmarkCommand;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import rocket.formatter.CustomDateFormatter;
+import rocket.common.Utils;
+import rocket.exception.EmptyTaskNameException;
 
 /**
  * Represents a parser that handles parsing user input into commands.
@@ -27,72 +39,69 @@ public class Parser {
 
     /**
      * Parses user input into a command.
-     *
-     * @param input User input.
-     * @return Command object.
      */
     public static Command parse(String input) {
         String commandType = getCommandType(input);
         switch (commandType) {
-            case TODO:
-                try {
-                    Todo todo = createTodoFromInput(input);
-                    return new AddCommand(todo, false);
-                } catch (EmptyTaskNameException e) {
-                    return new EmptyTaskNameCommand();
-                }
-            case DEADLINE:
-                try {
-                    Deadline deadline = createDeadlineFromInput(input);
-                    return new AddCommand(deadline, false);
-                } catch (EmptyTaskNameException e) {
-                    return new EmptyTaskNameCommand();
-                } catch (IllegalArgumentException e) {
-                    return new InvalidFormatCommand();
-                } catch (DateTimeParseException e) {
-                    return new InvalidDateCommand();
-                }
-            case EVENT:
-                try {
-                    Event event = createEventFromInput(input);
-                    return new AddCommand(event, false);
-                } catch (EmptyTaskNameException e) {
-                    return new EmptyTaskNameCommand();
-                } catch (IllegalArgumentException e) {
-                    return new InvalidFormatCommand();
-                } catch (DateTimeParseException e) {
-                    return new InvalidDateCommand();
-                }
-            case DELETE:
-                try {
-                    int taskNum = getTaskNumToDelete(input);
-                    return new DeleteCommand(taskNum);
-                } catch (NumberFormatException e) {
-                    return new InvalidFormatCommand();
-                }
-            case MARK:
-                try {
-                    int taskNum = getTaskNumToMark(input);
-                    return new MarkCommand(taskNum);
-                } catch (NumberFormatException e) {
-                    return new InvalidFormatCommand();
-                }
-            case UNMARK:
-                try {
-                    int taskNum = getTaskNumToUnmark(input);
-                    return new UnmarkCommand(taskNum);
-                } catch (NumberFormatException e) {
-                    return new InvalidFormatCommand();
-                }
-            case EXIT:
-                return new ExitCommand();
-            case LIST:
-                return new ListCommand();
-            case FIND:
-                String keyword = input.substring(5);
-                return new FindCommand(keyword);
-            default:
+        case TODO:
+            try {
+                Todo todo = createTodoFromInput(input);
+                return new AddCommand(todo, false);
+            } catch (EmptyTaskNameException e) {
+                return new EmptyTaskNameCommand();
+            }
+        case DEADLINE:
+            try {
+                Deadline deadline = createDeadlineFromInput(input);
+                return new AddCommand(deadline, false);
+            } catch (EmptyTaskNameException e) {
+                return new EmptyTaskNameCommand();
+            } catch (IllegalArgumentException e) {
                 return new InvalidFormatCommand();
+            } catch (DateTimeParseException e) {
+                return new InvalidDateCommand();
+            }
+        case EVENT:
+            try {
+                Event event = createEventFromInput(input);
+                return new AddCommand(event, false);
+            } catch (EmptyTaskNameException e) {
+                return new EmptyTaskNameCommand();
+            } catch (IllegalArgumentException e) {
+                return new InvalidFormatCommand();
+            } catch (DateTimeParseException e) {
+                return new InvalidDateCommand();
+            }
+        case DELETE:
+            try {
+                int taskNum = getTaskNumToDelete(input);
+                return new DeleteCommand(taskNum);
+            } catch (NumberFormatException e) {
+                return new InvalidFormatCommand();
+            }
+        case MARK:
+            try {
+                int taskNum = getTaskNumToMark(input);
+                return new MarkCommand(taskNum);
+            } catch (NumberFormatException e) {
+                return new InvalidFormatCommand();
+            }
+        case UNMARK:
+            try {
+                int taskNum = getTaskNumToUnmark(input);
+                return new UnmarkCommand(taskNum);
+            } catch (NumberFormatException e) {
+                return new InvalidFormatCommand();
+            }
+        case EXIT:
+            return new ExitCommand();
+        case LIST:
+            return new ListCommand();
+        case FIND:
+            String keyword = input.substring(5);
+            return new FindCommand(keyword);
+        default:
+            return new InvalidFormatCommand();
         }
     }
 
@@ -119,8 +128,7 @@ public class Parser {
             return "invalid";
         }
     }
-
-    // format: todo NAME
+    
     private static boolean isTodo(String input) {
         return input.length() > 5
                 && input.substring(0, 4).equalsIgnoreCase(TODO)

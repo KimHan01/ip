@@ -9,7 +9,7 @@ import rocket.ui.Ui;
  * Represents a command to find tasks in the task list.
  */
 public class FindCommand extends Command {
-    String keyword;
+    private final String keyword;
 
     /**
      * Creates a new {@code FindCommand} with the given keyword to search for.
