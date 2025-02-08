@@ -4,21 +4,32 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a custom date formatter that formats dates in a specific way.
+ */
 public class CustomDateFormatter {
     private final static DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final static DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
-    // Given a string of input format("yyyy-MM-dd"), outputs LocalDateTime
+    /**
+     * Returns a LocalDate object from a string in input format("yyyy-MM-dd").
+     * @throws DateTimeParseException when the string is not of correct format.
+     */
     public static LocalDate dateFromInputFormat(String input) throws DateTimeParseException{
         return LocalDate.parse(input, inputFormat);
     }
 
-    // Given a LocalDateTime, returns a String in outputFormat
+    /**
+     * Returns a string in output format("MMM dd yyyy") from a LocalDate object.
+     */
     public static String formatOutput(LocalDate inputDateTime) {
         return inputDateTime.format(outputFormat);
     }
 
-    // Given a string of output format("MMM dd yyyy"), outputs LocalDateTime
+    /**
+     * Returns a LocalDate object from a string in output format("MMM dd yyyy").
+     * @throws DateTimeParseException when the string is not of correct format.
+     */
     public static LocalDate dateFromOutputFormat(String text) throws DateTimeParseException {
         return LocalDate.parse(text, outputFormat);
     }

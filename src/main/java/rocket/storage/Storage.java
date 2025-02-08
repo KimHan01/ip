@@ -11,11 +11,19 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage of tasks.
+ * Handles creating, reading and writing from storage file.
+ */
 public class Storage {
     private final String filePath;
     private final File file;
     private final File dir;
 
+    /**
+     * Creates a {@code Storage} object with a given file path.
+     * Creates file at file path if it does not exist.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
@@ -23,6 +31,9 @@ public class Storage {
         createFilePath(filePath); // Creates file if it does not exist
     }
 
+    /**
+     * Creates directory and file if they do not exist at given file path.
+     */
     public void createFilePath(String filePath) {
         if (!dir.isDirectory()) {
             if (dir.mkdir()) {
@@ -45,8 +56,11 @@ public class Storage {
         }
     }
 
-    // Returns ArrayList from storage file,
-    // used as argument for constructor of TaskList class
+    /**
+     * Loads tasks from storage file into an ArrayList.
+     * @return ArrayList of tasks
+     * @throws FileNotFoundException if file is not found
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(file);
@@ -77,7 +91,6 @@ public class Storage {
         return tasks;
     }
 
-    // Writes a list of tasks into a given filePath
     private void writeToStorage(TaskList list, String filePath) {
         try {
             FileWriter writer = new FileWriter(filePath, true);
@@ -112,7 +125,10 @@ public class Storage {
         }
     }
 
-    // Updates storage file with task list.
+    /**
+     * Rewrites storage file with tasks from TaskList.
+     * @param list TaskList to rewrite storage with
+     */
     public void updateStorage(TaskList list) {
         File temp = writeToTemp(list);
         replaceFile(temp, file);
