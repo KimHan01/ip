@@ -5,17 +5,30 @@ import rocket.exception.RocketRuntimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
+    /**
+     * Creates a {@code TaskList} object with an empty list of tasks.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Creates a {@code TaskList} object with a list of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns a {@code Task} object from the {@code TaskList}.
+     * @param index Index of the task to be returned.
+     */
     public Task get(int index) {
         if (index < 0 || index >= tasks.size()) {
             throw new ArrayIndexOutOfBoundsException("Index: " + index + ", Size: " + tasks.size());

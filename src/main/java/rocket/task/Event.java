@@ -4,12 +4,18 @@ import rocket.formatter.CustomDateFormatter;
 
 import java.time.LocalDate;
 
+/**
+ * Represents an Event task with a start date(from) and an end date(to).
+ */
 public class Event extends Task {
     private LocalDate from;
     private LocalDate to;
     private final String fromOutput; // Formatted output string of from
     private final String toOutput; // Formatted output string of to
 
+    /**
+     * Creates an {@code Event} object with a name, mark, start date(from) and end date(to).
+     */
     public Event(String taskName, boolean mark, LocalDate from, LocalDate to) {
         super(taskName, mark);
         this.from = from;
@@ -18,6 +24,10 @@ public class Event extends Task {
         this.toOutput = CustomDateFormatter.formatOutput(to);
     }
 
+    /**
+     * Returns formatted String representation for storage file of {@code Event} object.
+     * Format to be returned is "E|MARK|NAME|FROM|TO".
+     */
     // Format: E|0/1|NAME|FROM|TO
     @Override
     public String toTxt() {
@@ -40,7 +50,10 @@ public class Event extends Task {
         return this.to;
     }
 
-    // Format: 0/1|NAME|FROM|TO
+    /**
+     * Returns an {@code Event} object from a formatted String without its header("E|").
+     * @throws ArrayIndexOutOfBoundsException
+     */
     public static Event fromTxt(String body) throws ArrayIndexOutOfBoundsException{
         String[] parts = body.split("\\|");
         boolean mark = parts[0].equals("1");
@@ -51,6 +64,9 @@ public class Event extends Task {
                 CustomDateFormatter.dateFromOutputFormat(to));
     }
 
+    /**
+     * Returns task description of {@code Event} object.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + fromOutput + " to: " + toOutput + ")";
