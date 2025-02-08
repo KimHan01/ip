@@ -11,7 +11,7 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) {
-        if (list.getSize() == 0) {
+        if (list.isEmpty()) {
             ui.readEmptyList();
         } else {
             ui.readListItems(list.getTasks());

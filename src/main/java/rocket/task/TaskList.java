@@ -25,17 +25,18 @@ public class TaskList {
         boolean mark = task.getMark();
         TaskType taskType = task.getType();
         switch (taskType) {
-            case TODO:
-                return new Todo(name, mark);
-            case DEADLINE:
-                LocalDate by = task.getBy();
-                return new Deadline(name, mark, by);
-            case EVENT:
-                LocalDate from = task.getFrom();
-                LocalDate to = task.getTo();
-                return new Event(name, mark, from, to);
-            default:
-                throw new RocketRuntimeException("Failed to get Task from TaskList");
+        case TODO:
+            return new Todo(name, mark);
+        case DEADLINE:
+            LocalDate by = task.getBy();
+            return new Deadline(name, mark, by);
+        case EVENT:
+            LocalDate from = task.getFrom();
+            LocalDate to = task.getTo();
+            return new Event(name, mark, from, to);
+        default:
+            throw new RocketRuntimeException("Failed to get Task from TaskList");
+            // Fallthrough: throws RocketRuntimeException, but this statement should not occur
         }
     }
 
@@ -45,6 +46,10 @@ public class TaskList {
 
     public ArrayList<Task> getTasks() {
         return new ArrayList<>(tasks);
+    }
+
+    public boolean isEmpty() {
+        return tasks.isEmpty();
     }
 
     public Task remove(int index) throws IndexOutOfBoundsException {

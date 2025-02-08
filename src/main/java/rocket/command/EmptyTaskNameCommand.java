@@ -5,7 +5,6 @@ import rocket.ui.Ui;
 import rocket.storage.Storage;
 
 public class EmptyTaskNameCommand extends Command {
-
     public EmptyTaskNameCommand() {
         super(false);
     }

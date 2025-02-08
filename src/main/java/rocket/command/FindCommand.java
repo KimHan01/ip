@@ -6,7 +6,7 @@ import rocket.task.TaskList;
 import rocket.ui.Ui;
 
 public class FindCommand extends Command {
-    String keyword;
+    private final String keyword;
 
     public FindCommand(String keyword) {
         super(false);
