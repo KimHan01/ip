@@ -5,9 +5,15 @@ import rocket.task.Task;
 import rocket.task.TaskList;
 import rocket.ui.Ui;
 
+/**
+ * Represents a command to add a task to the task list.
+ */
 public class AddCommand extends Command {
     private final Task taskToAdd;
 
+    /**
+     * Creates a new {@code AddCommand} with the given task to add.
+     */
     public AddCommand(Task taskToAdd, boolean isEmpty) {
         super(false);
         this.taskToAdd = taskToAdd;

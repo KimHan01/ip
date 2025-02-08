@@ -4,19 +4,28 @@ import rocket.formatter.CustomDateFormatter;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a Deadline, containing a single due date to complete the task by.
+ */
 public class Deadline extends Task {
     private final LocalDate by;
     private final String DateTimeOutput;
 
-    // Input format is deadline <TaskName> /by <Date>,
-    // <Date> format from argument should be "yyyy-MM-dd HHmm"
+    /**
+     * Creates a {@code Deadline} object with a name, mark and due date(by).
+     * Format of date should be "yyyy-MM-dd HHmm".
+     */
     public Deadline(String taskName, boolean mark, LocalDate by) {
         super(taskName, mark);
         this.by = by;
         this.DateTimeOutput = CustomDateFormatter.formatOutput(by);
     }
 
-    // Format: D|0/1|NAME|BY, converting BY into output format
+    /**
+     * Returns formatted String representation for storage file of {@code Deadline} object.
+     * Format to be returned is "D|MARK|NAME|BY".
+     * @return formatted String for storage
+     */
     @Override
     public String toTxt() {
         String mark = super.getMark() ? "1" : "0";
@@ -33,6 +42,10 @@ public class Deadline extends Task {
         return this.by;
     }
 
+    /**
+     * Returns a {@code Deadline} object from a formatted String without its header("D|").
+     * @throws ArrayIndexOutOfBoundsException if the input String is not formatted correctly
+     */
     // Format: 0/1|NAME|BY, converts BY from output format into LocalDateTime
     public static Deadline fromTxt(String body) throws ArrayIndexOutOfBoundsException {
         String[] parts = body.split("\\|", 2);
@@ -44,6 +57,9 @@ public class Deadline extends Task {
         return new Deadline(name, mark, CustomDateFormatter.dateFromOutputFormat(by));
     }
 
+    /**
+     * Returns task description of {@code Deadline} object.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + DateTimeOutput + ")";

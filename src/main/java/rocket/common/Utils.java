@@ -1,5 +1,8 @@
 package rocket.common;
 
+/**
+ * Contains utility methods.
+ */
 public class Utils {
     public static boolean isInteger(String x) {
         try {

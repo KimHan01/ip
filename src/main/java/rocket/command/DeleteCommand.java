@@ -5,9 +5,15 @@ import rocket.task.Task;
 import rocket.task.TaskList;
 import rocket.ui.Ui;
 
+/**
+ * Represents a command to delete a task from the task list.
+ */
 public class DeleteCommand extends Command {
     private final int indexToDelete;
 
+    /**
+     * Creates a new {@code DeleteCommand} with the given task number to delete.
+     */
     public DeleteCommand(int taskNum) {
         super(false);
         this.indexToDelete = taskNum - 1;

@@ -11,6 +11,9 @@ import rocket.task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a parser that handles parsing user input into commands.
+ */
 public class Parser {
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
@@ -22,7 +25,12 @@ public class Parser {
     private static final String LIST = "list";
     private static final String FIND = "find";
 
-    // All commands: Add, Delete, Mark, Unmark, Exit, List
+    /**
+     * Parses user input into a command.
+     *
+     * @param input User input.
+     * @return Command object.
+     */
     public static Command parse(String input) {
         String commandType = getCommandType(input);
         switch (commandType) {
