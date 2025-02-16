@@ -46,10 +46,18 @@ public class Rocket {
     }
 
     /**
-     * The entry point of the program
+     * Entry point of the program
      */
     public static void main(String[] args) {
         String filePath = "./data/storage.txt";
         new Rocket(filePath).run();
+    }
+
+
+    /**
+     * Generates a response according to user input from chat message
+     */
+    public String getResponse(String input) {
+        return "Rocket heard: " + input;
     }
 }
