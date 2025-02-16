@@ -128,7 +128,7 @@ public class Parser {
             return "invalid";
         }
     }
-    
+
     private static boolean isTodo(String input) {
         return input.length() > 5
                 && input.substring(0, 4).equalsIgnoreCase(TODO)
