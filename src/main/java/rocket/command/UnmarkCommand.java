@@ -24,10 +24,11 @@ public class UnmarkCommand extends Command {
         try {
             Task unmarkedTask = list.unmark(indexToUnmark);
             storage.updateStorage(list);
-            ui.readUnmarkTask(unmarkedTask);
-            return getUnmarkResponse(unmarkedTask);
+            String res = getUnmarkResponse(unmarkedTask);
+            ui.read(res);
+            return res;
         } catch (IndexOutOfBoundsException e) {
-            ui.readInvalidUnmarkRequest();
+            ui.read(getInvalidUnmarkReponse());
             return getInvalidUnmarkReponse();
         }
     }

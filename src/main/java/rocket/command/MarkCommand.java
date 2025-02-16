@@ -24,10 +24,11 @@ public class MarkCommand extends Command {
         try {
             Task markedTask = list.mark(indexToMark);
             storage.updateStorage(list);
-            ui.readMarkTask(markedTask);
-            return getMarkResponse(markedTask);
+            String res = getMarkResponse(markedTask);
+            ui.read(res);
+            return res;
         } catch (IndexOutOfBoundsException e) {
-            ui.readInvalidMarkRequest();
+            ui.read(getInvalidMarkResponse());
             return getInvalidMarkResponse();
         }
     }

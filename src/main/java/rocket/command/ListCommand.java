@@ -21,11 +21,12 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
         if (list.isEmpty()) {
-            ui.readEmptyList();
+            ui.read(getEmptyListResponse());
             return getEmptyListResponse();
         } else {
-            ui.readListItems(list.getTasks());
-            return getListResponse(list.getTasks());
+            String res = getListResponse(list.getTasks());
+            ui.read(res);
+            return res;
         }
     }
 

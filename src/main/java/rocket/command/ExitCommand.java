@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
 
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
-        ui.bye();
+        ui.read(getFarewellResponse());
         return getFarewellResponse();
     }
 

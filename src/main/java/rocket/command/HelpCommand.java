@@ -39,7 +39,7 @@ public class HelpCommand extends Command {
                 *Date format: YYYY-MM-DD (e.g. 2025-06-07 --> 2025 June 07)
                 *Index: an integer value representing the task number in the list
                 """;
-        System.out.println(helpMessage);
+        ui.read(helpMessage);
         return helpMessage;
     }
 }

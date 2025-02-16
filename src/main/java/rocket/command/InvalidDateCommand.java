@@ -17,7 +17,7 @@ public class InvalidDateCommand extends Command {
 
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
-        ui.readInvalidDateFormat();
+        ui.read(getInvalidDateFormatResponse());
         return getInvalidDateFormatResponse();
     }
 

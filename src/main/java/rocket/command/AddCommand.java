@@ -23,15 +23,16 @@ public class AddCommand extends Command {
     public String execute(TaskList list, Ui ui, Storage storage) {
         list.add(taskToAdd);
         storage.updateStorage(list);
-        ui.readAddTask(taskToAdd, list.getSize());
-        return readAddTask(taskToAdd, list.getSize());
+        String res = getAddTaskResponse(taskToAdd, list.getSize());
+        ui.read(res);
+        return getAddTaskResponse(taskToAdd, list.getSize());
     }
 
     /**
      * Response to successfully adding a task,
      * shows task description and how many tasks are currently in the list.
      */
-    public String readAddTask(Task task, int listSize) {
+    public String getAddTaskResponse(Task task, int listSize) {
         return "Successfully added ToDo:\n"
                 + task.toString() + "\n"
                 + "Now you have " + listSize + " tasks in the list";

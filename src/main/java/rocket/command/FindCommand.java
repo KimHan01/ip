@@ -27,8 +27,10 @@ public class FindCommand extends Command {
                 found.add(task);
             }
         }
-        ui.readFind(found);
-        return getFindResponse(found);
+        String res = getFindResponse(found);
+        //ui.readFind(found);
+        ui.read(res);
+        return res;
     }
 
     /**

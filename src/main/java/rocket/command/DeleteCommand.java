@@ -24,11 +24,12 @@ public class DeleteCommand extends Command {
         try {
             Task removedTask = list.remove(indexToDelete);
             storage.updateStorage(list);
-            ui.readRemoveTask(removedTask, list.getSize());
-            return getRemoveTaskResponse(removedTask, list.getSize());
+            String res = getDeleteResponse(removedTask, list.getSize());
+            ui.read(res);
+            return res;
         } catch (IndexOutOfBoundsException e) {
-            ui.readInvalidRemoveTask();
-            return readInvalidRemoveTask();
+            ui.read(getInvalidDeleteResponse());
+            return getInvalidDeleteResponse();
         }
     }
 
@@ -36,7 +37,7 @@ public class DeleteCommand extends Command {
      * Response to successfully deleting a task from the list,
      * shows task description and how many tasks are currently in the list.
      */
-    public String getRemoveTaskResponse(Task task, int listSize) {
+    public String getDeleteResponse(Task task, int listSize) {
         return "I've removed this task:\n" + task.toString()
                 + "\n" + "Now you have " + listSize + " tasks in the list.";
     }
@@ -44,7 +45,7 @@ public class DeleteCommand extends Command {
     /**
      * Response to trying to remove a task that does not exist.
      */
-    public String readInvalidRemoveTask() {
+    public String getInvalidDeleteResponse() {
         return "Yeah, that's not happening. The list has limits, just like my patience.\n" +
                 "Check your list, make sure the task exists, and try again";
     }

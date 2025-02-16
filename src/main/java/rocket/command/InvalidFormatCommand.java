@@ -16,7 +16,7 @@ public class InvalidFormatCommand extends Command {
     }
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
-        ui.readInvalidFormat();
+        ui.read(getInvalidFormatResponse());
         return getInvalidFormatResponse();
     }
 
