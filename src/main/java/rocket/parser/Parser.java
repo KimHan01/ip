@@ -15,6 +15,7 @@ import rocket.command.InvalidDateCommand;
 import rocket.command.ListCommand;
 import rocket.command.MarkCommand;
 import rocket.command.UnmarkCommand;
+import rocket.command.HelpCommand;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -36,6 +37,7 @@ public class Parser {
     private static final String EXIT = "bye";
     private static final String LIST = "list";
     private static final String FIND = "find";
+    private static final String HELP = "help";
 
     /**
      * Parses user input into a command.
@@ -100,6 +102,8 @@ public class Parser {
         case FIND:
             String keyword = input.substring(5);
             return new FindCommand(keyword);
+        case HELP:
+            return new HelpCommand();
         default:
             return new InvalidFormatCommand();
         }
@@ -124,6 +128,8 @@ public class Parser {
             return LIST;
         } else if (isFind(input)) {
             return FIND;
+        } else if (isHelp(input)) {
+            return HELP;
         } else {
             return "invalid";
         }
@@ -171,12 +177,16 @@ public class Parser {
                 && input.substring(4, 5).isBlank();
     }
 
+    private static boolean isHelp(String input) {
+        return input.trim().equalsIgnoreCase(HELP);
+    }
+
     private static boolean isExit(String input) {
-        return input.equalsIgnoreCase(EXIT);
+        return input.trim().equalsIgnoreCase(EXIT);
     }
 
     private static boolean isList(String input) {
-        return input.equalsIgnoreCase(LIST);
+        return input.trim().equalsIgnoreCase(LIST);
     }
 
     private static Todo createTodoFromInput(String input) throws EmptyTaskNameException {
