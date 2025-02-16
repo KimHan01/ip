@@ -56,6 +56,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Creates one dialog box for rocket containing his introduction message.
+     */
     @FXML
     public void introMessage() {
         dialogContainer.getChildren().add(DialogBox.getRocketDialog(rocket.rocketIntro(), rocketImage));
