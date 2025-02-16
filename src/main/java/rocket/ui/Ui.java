@@ -1,10 +1,7 @@
 package rocket.ui;
 
 import rocket.Rocket;
-import rocket.task.Task;
-import rocket.task.TaskList;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -49,24 +46,4 @@ public class Ui {
                 "blasting through the galaxy with Groot.\nSo, what do ya want? " +
                 "Make it quick, I've got virtual raccoon stuff to do.\n" + LINE);
     }
-
-    /**
-     * Response to trying to mark a task that does not exist.
-     */
-    public void readInvalidMarkRequest() {
-        read(LINE + "Oh, you're trying to mark off a task that doesn't even exist? \n" +
-                "If it's not on the list, it can't be marked as done. \n" +
-                "Check again, maybe the task is hiding in a parallel dimension or something.\n" + LINE);
-    }
-
-    /**
-     * Response to trying to unmark a task that does not exist.
-     */
-    public void readInvalidUnmarkRequest() {
-        read(LINE + "You're trying to unmark a task that doesn't even exist? \n" +
-                "That's some next-level overthinking right there. \n" +
-                "Look, if it's not on the list, there's nothing to unmark. \n" +
-                "Double-check your list, alright?\n" + LINE);
-    }
-
 }
