@@ -23,7 +23,7 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command
+     * Executes the command and returns rocket's response
      */
-    public abstract void execute(TaskList list, Ui ui, Storage storage);
+    public abstract String execute(TaskList list, Ui ui, Storage storage);
 }

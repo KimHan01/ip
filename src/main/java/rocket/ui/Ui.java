@@ -75,16 +75,6 @@ public class Ui {
     }
 
     /**
-     * Response to trying to add a task to a full list.
-     */
-    public static void fullList() {
-        System.out.println(LINE + "Whoa, whoa, whoa—pump the brakes! Your to-do list is already " +
-                "stuffed fuller than my weapons stash.\n" +
-                "You wanna add more? Maybe finish a task or two first, huh? Or we’ll need to invent a bigger list.\n" +
-                "Your call, but don’t blame me when the list explodes.\n" + LINE);
-    }
-
-    /**
      * Reads all tasks' description in the given list.
      */
     public void readListItems(ArrayList<Task> list) {

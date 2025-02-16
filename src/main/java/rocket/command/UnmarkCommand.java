@@ -20,13 +20,32 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         try {
             Task unmarkedTask = list.unmark(indexToUnmark);
             storage.updateStorage(list);
             ui.readUnmarkTask(unmarkedTask);
+            return getUnmarkResponse(unmarkedTask);
         } catch (IndexOutOfBoundsException e) {
             ui.readInvalidUnmarkRequest();
+            return getInvalidUnmarkReponse();
         }
+    }
+
+    /**
+     * Response to successfully unmarking a given task, shows task description.
+     */
+    public String getUnmarkResponse(Task task) {
+        return "Successfully unmarked:\n" + task.toString();
+    }
+
+    /**
+     * Response to trying to unmark a task that does not exist.
+     */
+    public String getInvalidUnmarkReponse() {
+        return "You're trying to unmark a task that doesn't even exist? \n" +
+                "That's some next-level overthinking right there. \n" +
+                "Look, if it's not on the list, there's nothing to unmark. \n" +
+                "Double-check your list, alright?";
     }
 }

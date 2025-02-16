@@ -20,7 +20,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         TaskList found = new TaskList();
         for (Task task : list.getTasks()) {
             if (task.getName().contains(keyword)) {
@@ -28,5 +28,21 @@ public class FindCommand extends Command {
             }
         }
         ui.readFind(found);
+        return getFindResponse(found);
+    }
+
+    /**
+     * Response to finding tasks by keyword,
+     * shows the task description of all tasks found.
+     */
+    public String getFindResponse(TaskList tasks) {
+        StringBuilder res = new StringBuilder();
+        res.append("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < tasks.getSize(); i++) {
+            int taskNum = i + 1;
+            res.append(taskNum).append(".")
+                    .append(tasks.get(i).toString()).append("\n");
+        }
+        return res.toString();
     }
 }

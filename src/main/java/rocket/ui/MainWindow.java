@@ -50,6 +50,15 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getRocketDialog(response, rocketImage)
         );
         userInput.clear();
+
+        if (input.equalsIgnoreCase("bye")) {
+            javafx.application.Platform.exit();
+        }
+    }
+
+    @FXML
+    public void introMessage() {
+        dialogContainer.getChildren().add(DialogBox.getRocketDialog(rocket.rocketIntro(), rocketImage));
     }
 }
 

@@ -16,7 +16,15 @@ public class InvalidDateCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         ui.readInvalidDateFormat();
+        return getInvalidDateFormatResponse();
+    }
+
+    /**
+     * Response to invalid date format given by user.
+     */
+    public String getInvalidDateFormatResponse() {
+        return "Invalid date format given. Please use yyyy-mm-dd";
     }
 }

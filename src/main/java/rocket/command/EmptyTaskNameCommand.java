@@ -15,7 +15,19 @@ public class EmptyTaskNameCommand extends Command {
         super(false);
     }
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         ui.addEmptyTask();
+        return getAddEmptyTaskResponse();
+    }
+
+    /**
+     * Response to adding a task with no name.
+     */
+    public String getAddEmptyTaskResponse() {
+        return "Seriously? An empty task? What, are you trying to add \"nothing\" " +
+                "to your to-do list?\n" +
+                "Hate to break it to you, but that's not how this works.\n" +
+                "Try adding something, even if it's \"stare at the wall dramatically.\"\n" +
+                "At least give me something to work with here!";
     }
 }

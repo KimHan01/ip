@@ -16,7 +16,13 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         ui.bye();
+        return getFarewellResponse();
+    }
+
+    public String getFarewellResponse() {
+        return "Alright, fine. You're leaving already? Whatever. " +
+                "Just don't blow anything up without me. Rocket out!\nmutters Stupid chatbot job...";
     }
 }
