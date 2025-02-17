@@ -108,7 +108,7 @@ public class Deadline extends Task {
             throws EmptyTaskNameException, IllegalArgumentException, DateTimeParseException {
         String[] parts = input.substring(9).split("/by", 0);
         String name = parts[0].trim();
-        if (name.isBlank()) { // If name is blank
+        if (name.isBlank()) {
             throw new EmptyTaskNameException("Blank Deadline name given");
         }
         if (parts.length != 2) {
