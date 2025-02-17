@@ -30,13 +30,13 @@ public class Storage {
     public Storage(String filePath) {
         this.file = new File(filePath);
         this.dir = file.getParentFile();
-        createFilePath(filePath); // Creates file if it does not exist
+        createFilePath(); // Creates file if it does not exist
     }
 
     /**
      * Creates directory and file if they do not exist at given file path.
      */
-    public void createFilePath(String filePath) {
+    public void createFilePath() {
         if (!dir.isDirectory()) {
             if (dir.mkdir()) {
                 System.out.println("Created directory (" + dir.getPath() + ")");
@@ -93,6 +93,15 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Rewrites storage file with tasks from TaskList.
+     * @param list TaskList to rewrite storage with
+     */
+    public void updateStorage(TaskList list) {
+        File temp = writeToTemp(list);
+        replaceFile(temp, file);
+    }
+
     private void writeToStorage(TaskList list, String filePath) {
         try {
             FileWriter writer = new FileWriter(filePath, true);
@@ -125,14 +134,5 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Rewrites storage file with tasks from TaskList.
-     * @param list TaskList to rewrite storage with
-     */
-    public void updateStorage(TaskList list) {
-        File temp = writeToTemp(list);
-        replaceFile(temp, file);
     }
 }

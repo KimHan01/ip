@@ -22,9 +22,9 @@ public class InvalidDateCommand extends Command {
     }
 
     /**
-     * Response to invalid date format given by user.
+     * Returns a response to invalid date format.
      */
-    public String getInvalidDateFormatResponse() {
+    private String getInvalidDateFormatResponse() {
         return "Invalid date format given. Please use yyyy-mm-dd";
     }
 }

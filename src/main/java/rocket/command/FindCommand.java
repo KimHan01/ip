@@ -28,16 +28,31 @@ public class FindCommand extends Command {
             }
         }
         String res = getFindResponse(found);
-        //ui.readFind(found);
         ui.read(res);
         return res;
     }
 
     /**
-     * Response to finding tasks by keyword,
-     * shows the task description of all tasks found.
+     * Checks if the given input is a {@code FindCommand}.
      */
-    public String getFindResponse(TaskList tasks) {
+    public static boolean isFind(String input) {
+        return input.length() > 5
+                && input.substring(0, 4).equalsIgnoreCase(InputCommandType.FIND.name())
+                && input.substring(4, 5).isBlank();
+    }
+
+    /**
+     * Returns the {@code FindCommand} from the given input.
+     */
+    public static FindCommand getFindCommand(String input) {
+        String keyword = input.substring(InputCommandType.FIND.name().length() + 1);
+        return new FindCommand(keyword);
+    }
+
+    /**
+     * Returns the task description of all tasks found in the task list by the Find command.
+     */
+    private String getFindResponse(TaskList tasks) {
         StringBuilder res = new StringBuilder();
         res.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.getSize(); i++) {

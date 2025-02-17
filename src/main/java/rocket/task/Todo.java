@@ -1,5 +1,10 @@
 package rocket.task;
 
+import rocket.command.AddCommand;
+import rocket.command.Command;
+import rocket.command.EmptyTaskNameCommand;
+import rocket.exception.EmptyTaskNameException;
+
 /**
  * Represents a task with a name and a mark.
  */
@@ -9,8 +14,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns formatted String representation for storage file of {@code Todo} object.
-     * Format to be returned is "T|MARK|NAME".
+     * Returns formatted String representation ("T|MARK|NAME") of {@code Todo} object.
      */
     @Override
     public String toTxt() {
@@ -24,21 +28,52 @@ public class Todo extends Task {
     }
 
     /**
+     * Returns the task description of {@code Todo} object.
+     */
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+
+    /**
      * Returns a {@code Todo} object from a formatted String without its header("T|").
-     * @throws ArrayIndexOutOfBoundsException
+     * @throws ArrayIndexOutOfBoundsException if the format is wrong
      */
     public static Todo fromTxt(String body) throws ArrayIndexOutOfBoundsException {
-        String[] parts = body.split("\\|", 2); // Split once
+        // Format of given body should be: 0/1|NAME
+        String[] parts = body.split("\\|", 2);
         boolean mark = parts[0].equals("1");
         String name = parts[1];
         return new Todo(name, mark);
     }
 
     /**
-     * Returns the task description of {@code Todo} object.
+     * Checks if the input is a {@code Todo} task.
      */
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
+    public static boolean isTodo(String input) {
+        return input.length() > 5
+                && input.substring(0, 4).equalsIgnoreCase(TaskType.TODO.name())
+                && input.substring(4, 5).isBlank();
+    }
+
+    /**
+     * Returns the {@code AddCommand} for a {@code Todo} task from the given input if valid,
+     * otherwise the appropriate error {@code Command} is returned.
+     */
+    public static Command getAddTodoCommand(String input) {
+        try {
+            Todo todo = Todo.createTodoFromInput(input);
+            return new AddCommand(todo, false);
+        } catch (EmptyTaskNameException e) {
+            return new EmptyTaskNameCommand();
+        }
+    }
+
+    private static Todo createTodoFromInput(String input) throws EmptyTaskNameException {
+        String name = input.substring(5);
+        if (name.isBlank()) {
+            throw new EmptyTaskNameException("Blank Todo name given");
+        }
+        return new Todo(name.trim(), false);
     }
 }
