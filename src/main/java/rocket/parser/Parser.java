@@ -100,6 +100,7 @@ public class Parser {
         case LIST:
             return new ListCommand();
         case FIND:
+            assert input.length() > 5: "Invalid Find input";
             String keyword = input.substring(5);
             return new FindCommand(keyword);
         case HELP:
@@ -190,6 +191,8 @@ public class Parser {
     }
 
     private static Todo createTodoFromInput(String input) throws EmptyTaskNameException {
+        assert input.length() > 5: "Invalid Todo input";
+
         String name = input.substring(5);
         if (name.isBlank()) {
             throw new EmptyTaskNameException("Blank Todo name given");
@@ -199,6 +202,8 @@ public class Parser {
 
     private static Deadline createDeadlineFromInput(String input)
             throws EmptyTaskNameException, IllegalArgumentException, DateTimeParseException {
+        assert input.length() > 9: "Invalid Deadline input";
+
         String[] parts = input.substring(9).split("/by", 0);
         String name = parts[0].trim();
         if (name.isBlank()) { // If name is blank
@@ -213,6 +218,8 @@ public class Parser {
 
     private static Event createEventFromInput(String input)
             throws EmptyTaskNameException, IllegalArgumentException, DateTimeParseException {
+        assert input.length() > 6: "Invalid Event input";
+
         String[] splitFrom = input.substring(6).split("/from", 0);
         String name = splitFrom[0].trim();
         if (name.isBlank()) {
@@ -231,16 +238,19 @@ public class Parser {
     }
 
     private static int getTaskNumToDelete(String input) throws NumberFormatException {
+        assert input.length() > 7: "Invalid Delete input";
         String taskNum = input.substring(7);
         return Integer.parseInt(taskNum);
     }
 
     private static int getTaskNumToMark(String input) throws NumberFormatException {
+        assert input.length() > 5: "Invalid Mark input";
         String taskNum = input.substring(5);
         return Integer.parseInt(taskNum);
     }
 
     private static int getTaskNumToUnmark(String input) throws NumberFormatException {
+        assert input.length() > 7: "Invalid Unmark input";
         String taskNum = input.substring(7);
         return Integer.parseInt(taskNum);
     }
