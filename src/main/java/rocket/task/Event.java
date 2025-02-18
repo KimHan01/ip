@@ -76,7 +76,7 @@ public class Event extends Task {
      * Returns an {@code Event} object from a formatted String without its header("E|").
      * @throws ArrayIndexOutOfBoundsException if the input String is not formatted correctly
      */
-    public static Event fromTxt(String body) throws ArrayIndexOutOfBoundsException{
+    public static Event fromTxt(String body) throws ArrayIndexOutOfBoundsException {
         // Format of given body should be: 0/1|NAME|FROM|TO
         String[] parts = body.split("\\|");
         boolean mark = parts[0].equals("1");

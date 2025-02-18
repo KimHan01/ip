@@ -31,6 +31,9 @@ public class Storage {
         this.file = new File(filePath);
         this.dir = file.getParentFile();
         createFilePath(); // Creates file if it does not exist
+        createFilePath(); // Creates file if it does not exist
+        assert dir.isDirectory(): "Directory is not created";
+        assert file.isFile(): "File is not created";
     }
 
     /**
@@ -86,7 +89,7 @@ public class Storage {
                     break;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Error loading from storage file due to incorrect format");
+                System.out.println("Error loading a task from storage file due to incorrect format");
             }
         }
         sc.close();
