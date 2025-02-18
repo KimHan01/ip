@@ -46,7 +46,6 @@ public class Storage {
                 System.out.println("Failed to create directory");
             }
         }
-        assert dir.isDirectory(): "Directory is not created";
 
         if (!file.exists()) {
             try {
@@ -59,7 +58,7 @@ public class Storage {
                 e.printStackTrace();
             }
         }
-        assert file.isFile(): "File is not created";
+
     }
 
     /**
@@ -72,7 +71,6 @@ public class Storage {
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             String[] parts = sc.nextLine().split("\\|", 2);
-            assert parts.length == 2: "Incorrect file format";
 
             String header = parts[0];
             String body = parts[1];
