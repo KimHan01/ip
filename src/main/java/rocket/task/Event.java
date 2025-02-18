@@ -28,7 +28,6 @@ public class Event extends Task {
      * Returns formatted String representation for storage file of {@code Event} object.
      * Format to be returned is "E|MARK|NAME|FROM|TO".
      */
-    // Format: E|0/1|NAME|FROM|TO
     @Override
     public String toTxt() {
         String mark = super.getMark() ? "1" : "0";
@@ -54,7 +53,7 @@ public class Event extends Task {
      * Returns an {@code Event} object from a formatted String without its header("E|").
      * @throws ArrayIndexOutOfBoundsException if the input String is not formatted correctly
      */
-    public static Event fromTxt(String body) throws ArrayIndexOutOfBoundsException{
+    public static Event fromTxt(String body) throws ArrayIndexOutOfBoundsException {
         String[] parts = body.split("\\|");
         boolean mark = parts[0].equals("1");
         String name = parts[1];
