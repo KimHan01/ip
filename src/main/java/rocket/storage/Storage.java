@@ -31,6 +31,8 @@ public class Storage {
         this.file = new File(filePath);
         this.dir = file.getParentFile();
         createFilePath(filePath); // Creates file if it does not exist
+        assert dir.isDirectory(): "Directory is not created";
+        assert file.isFile(): "File is not created";
     }
 
     /**
@@ -86,7 +88,7 @@ public class Storage {
                     break;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Error loading from storage file due to incorrect format");
+                System.out.println("Error loading a task from storage file due to incorrect format");
             }
         }
         sc.close();
@@ -115,11 +117,13 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert temp.isFile(): "Temp file is not created";
         writeToStorage(list, tempPath);
         return temp;
     }
 
     private void replaceFile(File source, File dest) {
+        assert !source.getPath().equals(dest.getPath()) : "Source and destination files are the same";
         try {
             Files.move(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
@@ -132,6 +136,7 @@ public class Storage {
      * @param list TaskList to rewrite storage with
      */
     public void updateStorage(TaskList list) {
+        assert list != null : "TaskList is null";
         File temp = writeToTemp(list);
         replaceFile(temp, file);
     }
