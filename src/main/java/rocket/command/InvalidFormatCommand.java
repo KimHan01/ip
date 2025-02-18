@@ -14,6 +14,7 @@ public class InvalidFormatCommand extends Command {
     public InvalidFormatCommand() {
         super(false);
     }
+
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
         ui.read(getInvalidFormatResponse());
@@ -21,9 +22,9 @@ public class InvalidFormatCommand extends Command {
     }
 
     /**
-     * Response to invalid input from user.
+     * Returns a response to invalid input from user.
      */
-    public String getInvalidFormatResponse() {
+    private String getInvalidFormatResponse() {
         return "Maybe you wanna try giving me something that makes sense,\n" +
                 "unless you want me to invent something out of thin air,\n" +
                 "which, trust me, you don't";

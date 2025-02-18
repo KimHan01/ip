@@ -30,7 +30,8 @@ public class Storage {
     public Storage(String filePath) {
         this.file = new File(filePath);
         this.dir = file.getParentFile();
-        createFilePath(filePath); // Creates file if it does not exist
+        createFilePath(); // Creates file if it does not exist
+        createFilePath(); // Creates file if it does not exist
         assert dir.isDirectory(): "Directory is not created";
         assert file.isFile(): "File is not created";
     }
@@ -38,7 +39,7 @@ public class Storage {
     /**
      * Creates directory and file if they do not exist at given file path.
      */
-    public void createFilePath(String filePath) {
+    public void createFilePath() {
         if (!dir.isDirectory()) {
             if (dir.mkdir()) {
                 System.out.println("Created directory (" + dir.getPath() + ")");
@@ -58,7 +59,6 @@ public class Storage {
                 e.printStackTrace();
             }
         }
-
     }
 
     /**
@@ -71,7 +71,6 @@ public class Storage {
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             String[] parts = sc.nextLine().split("\\|", 2);
-
             String header = parts[0];
             String body = parts[1];
             try {
@@ -97,6 +96,15 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Rewrites storage file with tasks from TaskList.
+     * @param list TaskList to rewrite storage with
+     */
+    public void updateStorage(TaskList list) {
+        File temp = writeToTemp(list);
+        replaceFile(temp, file);
+    }
+
     private void writeToStorage(TaskList list, String filePath) {
         try {
             FileWriter writer = new FileWriter(filePath, true);
@@ -119,27 +127,15 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assert temp.isFile(): "Temp file is not created";
         writeToStorage(list, tempPath);
         return temp;
     }
 
     private void replaceFile(File source, File dest) {
-        assert !source.getPath().equals(dest.getPath()) : "Source and destination files are the same";
         try {
             Files.move(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Rewrites storage file with tasks from TaskList.
-     * @param list TaskList to rewrite storage with
-     */
-    public void updateStorage(TaskList list) {
-        assert list != null : "TaskList is null";
-        File temp = writeToTemp(list);
-        replaceFile(temp, file);
     }
 }

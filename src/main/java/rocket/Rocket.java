@@ -45,9 +45,6 @@ public class Rocket {
         }
     }
 
-    /**
-     * Entry point of the program
-     */
     public static void main(String[] args) {
         String filePath = "./data/storage.txt";
         new Rocket(filePath).run();

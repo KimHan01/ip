@@ -5,7 +5,9 @@ import rocket.task.TaskList;
 import rocket.ui.Ui;
 
 public class HelpCommand extends Command {
-
+    /**
+     * Creates a new {@code HelpCommand}.
+     */
     public HelpCommand() {
         super(false);
     }
@@ -41,5 +43,12 @@ public class HelpCommand extends Command {
                 """;
         ui.read(helpMessage);
         return helpMessage;
+    }
+
+    /**
+     * Checks if the given input is a {@code HelpCommand}.
+     */
+    public static boolean isHelp(String input) {
+        return input.trim().equalsIgnoreCase(InputCommandType.HELP.name());
     }
 }

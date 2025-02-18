@@ -21,7 +21,17 @@ public class ExitCommand extends Command {
         return getFarewellResponse();
     }
 
-    public String getFarewellResponse() {
+    /**
+     * Checks if the given input is an {@code ExitCommand}.
+     */
+    public static boolean isExit(String input) {
+        return input.trim().equalsIgnoreCase(InputCommandType.EXIT.name());
+    }
+
+    /**
+     * Returns the farewell response.
+     */
+    private String getFarewellResponse() {
         return "Alright, fine. You're leaving already? Whatever. " +
                 "Just don't blow anything up without me. Rocket out!\nmutters Stupid chatbot job...";
     }

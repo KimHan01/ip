@@ -1,8 +1,15 @@
 package rocket.task;
 
+import rocket.command.AddCommand;
+import rocket.command.Command;
+import rocket.command.EmptyTaskNameCommand;
+import rocket.command.InvalidDateCommand;
+import rocket.command.InvalidFormatCommand;
+import rocket.exception.EmptyTaskNameException;
 import rocket.formatter.CustomDateFormatter;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Deadline, containing a single due date to complete the task by.
@@ -37,17 +44,29 @@ public class Deadline extends Task {
         return TaskType.DEADLINE;
     }
 
+    /**
+     * Returns the due date of the deadline
+     * @return the due date of the deadline as a LocalDate
+     */
     @Override
     public LocalDate getBy() {
         return this.by;
     }
 
     /**
+     * Returns task description of {@code Deadline} object.
+     */
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + DateTimeOutput + ")";
+    }
+
+    /**
      * Returns a {@code Deadline} object from a formatted String without its header("D|").
      * @throws ArrayIndexOutOfBoundsException if the input String is not formatted correctly
      */
-    // Format: 0/1|NAME|BY, converts BY from output format into LocalDateTime
     public static Deadline fromTxt(String body) throws ArrayIndexOutOfBoundsException {
+        // Format of given body should be: 0/1|NAME|BY
         String[] parts = body.split("\\|", 2);
         boolean mark = parts[0].equals("1");
         String nameAndBy = parts[1];
@@ -58,10 +77,44 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns task description of {@code Deadline} object.
+     * Checks if the input is a {@code Deadline} task.
+     * Deadline task format should be "deadline NAME /by yyyy-MM-dd HHmm".
      */
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateTimeOutput + ")";
+    public static boolean isDeadline(String input) {
+        return input.length() > 9
+                && input.substring(0, 8).equalsIgnoreCase(TaskType.DEADLINE.name())
+                && input.substring(8, 9).isBlank();
+    }
+
+    /**
+     * Returns the {@code AddCommand} for a Deadline task
+     * from the given input if valid,
+     * otherwise an appropriate error {@code Command} is returned.
+     */
+    public static Command getAddDeadlineCommand(String input) {
+        try {
+            Deadline deadline = Deadline.createDeadlineFromInput(input);
+            return new AddCommand(deadline, false);
+        } catch (EmptyTaskNameException e) {
+            return new EmptyTaskNameCommand();
+        } catch (IllegalArgumentException e) {
+            return new InvalidFormatCommand();
+        } catch (DateTimeParseException e) {
+            return new InvalidDateCommand();
+        }
+    }
+
+    private static Deadline createDeadlineFromInput(String input)
+            throws EmptyTaskNameException, IllegalArgumentException, DateTimeParseException {
+        String[] parts = input.substring(9).split("/by", 0);
+        String name = parts[0].trim();
+        if (name.isBlank()) {
+            throw new EmptyTaskNameException("Blank Deadline name given");
+        }
+        if (parts.length != 2) {
+            throw new IllegalArgumentException("Invalid deadline format");
+        }
+        LocalDate dateTime = CustomDateFormatter.dateFromInputFormat(parts[1].trim());
+        return new Deadline(name, false, dateTime);
     }
 }

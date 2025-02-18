@@ -1,8 +1,12 @@
 package rocket.command;
 
 import rocket.storage.Storage;
+import rocket.task.Deadline;
+import rocket.task.Event;
 import rocket.task.Task;
 import rocket.task.TaskList;
+import rocket.task.TaskType;
+import rocket.task.Todo;
 import rocket.ui.Ui;
 
 /**
@@ -29,10 +33,27 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Response to successfully adding a task,
-     * shows task description and how many tasks are currently in the list.
+     * Returns an {@code AddCommand} based on the given task type.
+     * @param input the user input string
+     * @param taskType the type of task to be added
+     * @return the appropriate AddCommand based on the task type,
+     * or an appropriate error command if the input is invalid
      */
-    public String getAddTaskResponse(Task task, int listSize) {
+    public static Command getAddCommand(String input, TaskType taskType) {
+        if (taskType == TaskType.TODO) {
+            return Todo.getAddTodoCommand(input);
+        } else if (taskType == TaskType.DEADLINE) {
+            return Deadline.getAddDeadlineCommand(input);
+        } else if (taskType == TaskType.EVENT) {
+            return Event.getAddEventCommand(input);
+        }
+        return new InvalidFormatCommand();
+    }
+
+    /**
+     * Returns a response for successfully adding a task into the task list.
+     */
+    private String getAddTaskResponse(Task task, int listSize) {
         return "Successfully added ToDo:\n"
                 + task.toString() + "\n"
                 + "Now you have " + listSize + " tasks in the list";
