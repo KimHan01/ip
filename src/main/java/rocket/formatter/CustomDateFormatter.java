@@ -15,7 +15,7 @@ public class CustomDateFormatter {
      * Returns a LocalDate object from a string in input format("yyyy-MM-dd").
      * @throws DateTimeParseException when the string is not of correct format.
      */
-    public static LocalDate dateFromInputFormat(String input) throws DateTimeParseException{
+    public static LocalDate dateFromInputFormat(String input) throws DateTimeParseException {
         return LocalDate.parse(input, inputFormat);
     }
 
