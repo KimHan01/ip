@@ -1,5 +1,6 @@
 package rocket.parser;
 
+import rocket.command.EditCommand;
 import rocket.task.Deadline;
 import rocket.task.Event;
 import rocket.task.TaskType;
@@ -35,10 +36,11 @@ public class Parser {
             case DELETE -> DeleteCommand.getDeleteCommand(input);
             case MARK -> MarkCommand.getMarkCommand(input);
             case UNMARK -> UnmarkCommand.getUnmarkCommand(input);
-            case EXIT -> new ExitCommand();
+            case BYE -> new ExitCommand();
             case LIST -> new ListCommand();
             case FIND -> FindCommand.getFindCommand(input);
             case HELP -> new HelpCommand();
+            case EDIT -> EditCommand.getEditCommand(input);
             default -> new InvalidFormatCommand();
         };
     }
@@ -61,13 +63,15 @@ public class Parser {
         } else if (UnmarkCommand.isUnmark(input)) {
             return InputCommandType.UNMARK;
         } else if (ExitCommand.isExit(input)) {
-            return InputCommandType.EXIT;
+            return InputCommandType.BYE;
         } else if (ListCommand.isList(input)) {
             return InputCommandType.LIST;
         } else if (FindCommand.isFind(input)) {
             return InputCommandType.FIND;
         } else if (HelpCommand.isHelp(input)) {
             return InputCommandType.HELP;
+        } else if (EditCommand.isEdit(input)) {
+            return InputCommandType.EDIT;
         } else {
             return InputCommandType.INVALID;
         }

@@ -15,8 +15,8 @@ import java.time.format.DateTimeParseException;
  * Represents a Deadline, containing a single due date to complete the task by.
  */
 public class Deadline extends Task {
-    private final LocalDate by;
-    private final String DateTimeOutput;
+    private LocalDate by;
+    private String dateTimeOutput;
 
     /**
      * Creates a {@code Deadline} object with a name, mark and due date(by).
@@ -25,7 +25,7 @@ public class Deadline extends Task {
     public Deadline(String taskName, boolean mark, LocalDate by) {
         super(taskName, mark);
         this.by = by;
-        this.DateTimeOutput = CustomDateFormatter.formatOutput(by);
+        this.dateTimeOutput = CustomDateFormatter.formatOutput(by);
     }
 
     /**
@@ -36,7 +36,7 @@ public class Deadline extends Task {
     @Override
     public String toTxt() {
         String mark = super.getMark() ? "1" : "0";
-        return "D|" + mark + "|" + super.getName() + "|" + DateTimeOutput + "\n";
+        return "D|" + mark + "|" + super.getName() + "|" + dateTimeOutput + "\n";
     }
 
     @Override
@@ -58,7 +58,12 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateTimeOutput + ")";
+        return "[D]" + super.toString() + " (by: " + dateTimeOutput + ")";
+    }
+
+    public void updateBy(LocalDate newBy) {
+        this.by = newBy;
+        this.dateTimeOutput = CustomDateFormatter.formatOutput(newBy);
     }
 
     /**

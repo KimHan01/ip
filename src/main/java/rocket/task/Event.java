@@ -17,8 +17,8 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     private LocalDate from;
     private LocalDate to;
-    private final String fromOutput; // Formatted output string of from
-    private final String toOutput; // Formatted output string of to
+    private String fromOutput; // Formatted output string of from
+    private String toOutput; // Formatted output string of to
 
     /**
      * Creates an {@code Event} object with a name, mark, start date(from) and end date(to).
@@ -70,6 +70,16 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + fromOutput + " to: " + toOutput + ")";
+    }
+
+    public void updateTo(LocalDate date) {
+        this.to = date;
+        this.toOutput = CustomDateFormatter.formatOutput(to);
+    }
+
+    public void updateFrom(LocalDate date) {
+        this.from = date;
+        this.fromOutput = CustomDateFormatter.formatOutput(from);
     }
 
     /**

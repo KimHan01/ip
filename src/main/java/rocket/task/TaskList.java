@@ -26,7 +26,7 @@ public class TaskList {
     }
 
     /**
-     * Returns a {@code Task} object from the {@code TaskList}.
+     * Returns a duplicate {@code Task} object from the {@code TaskList}.
      * @param index Index of the task to be returned.
      */
     public Task get(int index) {
@@ -37,6 +37,8 @@ public class TaskList {
         String name = task.getName();
         boolean mark = task.getMark();
         TaskType taskType = task.getType();
+        assert taskType == TaskType.TODO || taskType == TaskType.DEADLINE || taskType == TaskType.EVENT
+                : "Invalid task type";
         switch (taskType) {
         case TODO:
             return new Todo(name, mark);
@@ -111,5 +113,24 @@ public class TaskList {
     public Task unmark(int index) throws IndexOutOfBoundsException {
         tasks.get(index).unmarkTask();
         return tasks.get(index);
+    }
+
+    public void updateTaskName(int index, String newName) throws IndexOutOfBoundsException {
+        tasks.get(index).rename(newName);
+    }
+
+    public void updateDeadlineDate(int index, LocalDate newDate) throws ClassCastException {
+        Deadline deadline = (Deadline) tasks.get(index);
+        deadline.updateBy(newDate);
+    }
+
+    public void updateEventStartDate(int index, LocalDate newDate) throws ClassCastException {
+        Event event = (Event) tasks.get(index);
+        event.updateFrom(newDate);
+    }
+
+    public void updateEventEndDate(int index, LocalDate newDate) throws ClassCastException {
+        Event event = (Event) tasks.get(index);
+        event.updateTo(newDate);
     }
 }

@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import rocket.Rocket;
+import rocket.command.InputCommandType;
 
 /**
  * Controller for the main GUI.
@@ -51,7 +52,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (input.equalsIgnoreCase("bye")) {
+        if (input.equalsIgnoreCase(InputCommandType.BYE.name())) {
             javafx.application.Platform.exit();
         }
     }
