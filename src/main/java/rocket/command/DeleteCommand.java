@@ -10,6 +10,7 @@ import rocket.ui.Ui;
  */
 public class DeleteCommand extends Command {
     private final int indexToDelete;
+    private static final int headerLen = InputCommandType.DELETE.name().length() + 1;
 
     /**
      * Creates a new {@code DeleteCommand} with the given task number to delete.
@@ -69,7 +70,7 @@ public class DeleteCommand extends Command {
     }
 
     private static int getTaskNumToDelete(String input) throws NumberFormatException {
-        String taskNum = input.substring(7);
+        String taskNum = input.substring(headerLen);
         return Integer.parseInt(taskNum);
     }
 }

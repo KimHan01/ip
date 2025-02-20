@@ -25,7 +25,7 @@ public class ExitCommand extends Command {
      * Checks if the given input is an {@code ExitCommand}.
      */
     public static boolean isExit(String input) {
-        return input.trim().equalsIgnoreCase(InputCommandType.EXIT.name());
+        return input.trim().equalsIgnoreCase(InputCommandType.BYE.name());
     }
 
     /**

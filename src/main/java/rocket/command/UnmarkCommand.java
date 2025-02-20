@@ -76,7 +76,7 @@ public class UnmarkCommand extends Command {
     }
 
     private static int getTaskNumToUnmark(String input) throws NumberFormatException {
-        String taskNum = input.substring(7);
+        String taskNum = input.substring(InputCommandType.UNMARK.name().length() + 1);
         return Integer.parseInt(taskNum);
     }
 }

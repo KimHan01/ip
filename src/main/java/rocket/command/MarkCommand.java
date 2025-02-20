@@ -75,7 +75,7 @@ public class MarkCommand extends Command {
     }
 
     private static int getTaskNumToMark(String input) throws NumberFormatException {
-        String taskNum = input.substring(5);
+        String taskNum = input.substring(InputCommandType.MARK.name().length() + 1);
         return Integer.parseInt(taskNum);
     }
 }
