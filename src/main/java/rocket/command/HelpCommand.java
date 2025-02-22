@@ -38,7 +38,7 @@ public class HelpCommand extends Command {
                 Constraints:
                 *There must be a space after a command keyword.
                 *Command keywords are case-insensitive
-                *Date format: YYYY-MM-DD (e.g. 2025-06-07 --> 2025 June 07)
+                *Date format: YYYY-MM-DD (e.g. 2025-06-07 is 2025 June 07)
                 *Index: an integer value representing the task number in the list
                 """;
         ui.read(helpMessage);

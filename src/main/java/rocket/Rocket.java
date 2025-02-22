@@ -61,11 +61,8 @@ public class Rocket {
     /**
      * Returns rocket's introduction
      */
-    public String rocketIntro() {
-        return "Oh, great. Another day, another gig as a chatbot. "
-                + "Alright listen up, kid.\nName's Rocket. Rocket Raccoon. Yeah, the genius, weapons expert, "
-                + "and the best pilot you'll ever meet.\nNow, I'm stuck here tracking your tasks instead of "
-                + "blasting through the galaxy with Groot.\nSo, what do ya want? "
-                + "Make it quick, I've got virtual raccoon stuff to do.";
+    public static String rocketIntro() {
+        return "Oh great, another day as a chatbot. Lets get this over with. What do you want?\n " +
+                "If you got no clue what you're doin', type help and I might not roast ya";
     }
 }

@@ -23,33 +23,13 @@ public class EditDateCommand extends EditCommand {
         return getUpdateDateMessage(list, ui, storage, fieldToChange, index);
     }
 
-    String getUpdateDateMessage(TaskList list, Ui ui, Storage storage, String inputDate, int index) {
+    private String getUpdateDateMessage(TaskList list, Ui ui, Storage storage, String inputDate, int index) {
         // inputDate will start with either "/by", "/from" or "to".
-        String date;
-        if (inputDate.startsWith("/by")) {
-            date = inputDate.substring(3).trim();
-        } else if (inputDate.startsWith("/from")) {
-            date = inputDate.substring(5).trim();
-        } else {
-            // inputDate starts with "/to"
-            date = inputDate.substring(3).trim();
-        }
-
         try {
-            LocalDate newDate = CustomDateFormatter.dateFromInputFormat(date);
-            Task oldTask = list.get(index);
-            if (inputDate.startsWith("/by")) {
-                list.updateDeadlineDate(index, newDate);
-            } else if (inputDate.startsWith("/from")) {
-                list.updateEventStartDate(index, newDate);
-            } else {
-                // inputDate starts with "/to"
-                list.updateEventEndDate(index, newDate);
-            }
+            Task[] oldAndNewTask = updateDate(list, storage, inputDate);
             storage.updateStorage(list);
-            Task newTask = list.get(index);
-            ui.read(getEditMessage(oldTask, newTask));
-            return getEditMessage(oldTask, newTask);
+            ui.read(getEditMessage(oldAndNewTask[0], oldAndNewTask[1]));
+            return getEditMessage(oldAndNewTask[0], oldAndNewTask[1]);
         } catch (DateTimeParseException e) {
             ui.read(getInvalidDateMessage());
             return getInvalidDateMessage();
@@ -62,8 +42,33 @@ public class EditDateCommand extends EditCommand {
         }
     }
 
-    String getInvalidDateMessage() {
-        return "Oh, for god's sake, we've been through this! Date's gotta be in yyyy-mm-dd format. "
-                + "Try again, and this time, get it right!";
+    private Task[] updateDate(TaskList list, Storage storage, String inputDate) {
+        String date;
+        if (inputDate.startsWith("/by")) {
+            date = inputDate.substring(3).trim();
+        } else if (inputDate.startsWith("/from")) {
+            date = inputDate.substring(5).trim();
+        } else {
+            // inputDate starts with "/to"
+            date = inputDate.substring(3).trim();
+        }
+
+        LocalDate newDate = CustomDateFormatter.dateFromInputFormat(date);
+        Task oldTask = list.get(index);
+        if (inputDate.startsWith("/by")) {
+            list.updateDeadlineDate(index, newDate);
+        } else if (inputDate.startsWith("/from")) {
+            list.updateEventStartDate(index, newDate);
+        } else {
+            // inputDate starts with "/to"
+            list.updateEventEndDate(index, newDate);
+        }
+        storage.updateStorage(list);
+        Task newTask = list.get(index);
+        return new Task[] {oldTask, newTask};
+    }
+
+    private String getInvalidDateMessage() {
+        return "Date's gotta be in yyyy-mm-dd format. Try again!";
     }
 }
