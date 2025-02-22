@@ -38,11 +38,12 @@ public class HelpCommand extends Command {
                     --> exits the program
                 
                 Constraints:
-                *There must be a space after a command keyword.
-                *Command keywords are case-insensitive
-                *Date format: YYYY-MM-DD (e.g. 2025-06-07)
-                *Index: an integer value representing the task number in the list
-                *Field specifier: "/n" for name, "/by" for deadline date, "/from" or "/to" for event dates
+                * There must be a space after any command keyword.
+                * Date format: YYYY-MM-DD (e.g. 2025-06-07)
+                * Index: an integer value representing the task number in the list
+                * Field specifier: "/n" for name, "/by" for deadline date, "/from" or "/to" for event dates
+                * You can only edit one field at a time
+                * Command keywords are case-insensitive
                 """;
         ui.read(helpMessage);
         return helpMessage;
