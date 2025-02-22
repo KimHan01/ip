@@ -9,10 +9,18 @@ import rocket.ui.Ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a command to edit the date of a task
+ */
 public class EditDateCommand extends EditCommand {
     private final String fieldToChange;
     private final int index;
 
+    /**
+     * Creates a command to edit the date of a task
+     * @param fieldToChange Includes field specifier (Format: [Field specifier][New value of field])
+     * @param taskNum The task number of the task
+     */
     public EditDateCommand(String fieldToChange, int taskNum) {
         this.fieldToChange = fieldToChange;
         this.index = taskNum - 1;
@@ -20,10 +28,10 @@ public class EditDateCommand extends EditCommand {
 
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
-        return getUpdateDateMessage(list, ui, storage, fieldToChange, index);
+        return getUpdateDateMessage(list, ui, storage, fieldToChange);
     }
 
-    private String getUpdateDateMessage(TaskList list, Ui ui, Storage storage, String inputDate, int index) {
+    private String getUpdateDateMessage(TaskList list, Ui ui, Storage storage, String inputDate) {
         // inputDate will start with either "/by", "/from" or "to".
         try {
             Task[] oldAndNewTask = updateDate(list, storage, inputDate);
@@ -69,6 +77,6 @@ public class EditDateCommand extends EditCommand {
     }
 
     private String getInvalidDateMessage() {
-        return "Date's gotta be in yyyy-mm-dd format. Try again!";
+        return "Oh come on, we've been through this! Date's gotta be in yyyy-mm-dd format. Try again!";
     }
 }

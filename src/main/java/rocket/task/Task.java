@@ -1,7 +1,5 @@
 package rocket.task;
 
-import rocket.exception.RocketException;
-
 import java.time.LocalDate;
 
 /**
@@ -9,7 +7,7 @@ import java.time.LocalDate;
  */
 public abstract class Task {
     private String taskName;
-    private boolean isDone = false;
+    private boolean isDone;
 
     /**
      * Creates a {@code Task} object with a name and mark.
@@ -37,30 +35,6 @@ public abstract class Task {
 
     public void rename(String newName) {
         this.taskName = newName;
-    }
-
-    /**
-     * Returns a new name to edit if num of names to edit is exactly 1.
-     * <p>The new name returned can be an empty string.</p>
-     * @throws RocketException When more than one name to edit is found
-     */
-    public static String getNewNameFromChanges(String[] changes) throws RocketException {
-        int numOfNameEdit = 0;
-        String newName = null;
-        for (int i = 2; i < changes.length; i++) {
-            // Checks for prefix ("/n")
-            if (changes[i].startsWith("/n")) {
-                numOfNameEdit ++;
-                newName = changes[i].substring(2).trim();
-            }
-        }
-        if (numOfNameEdit > 1) {
-            throw new RocketException("Invalid number of names to edit");
-        }
-        if (newName != null && newName.isBlank()) {
-            throw new RocketException("Blank name given for edit");
-        }
-        return newName;
     }
 
     /**

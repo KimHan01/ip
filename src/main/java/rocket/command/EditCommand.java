@@ -6,6 +6,9 @@ import rocket.task.Task;
 import rocket.task.TaskList;
 import rocket.ui.Ui;
 
+/**
+ * Represents a command to Edit a task
+ */
 public class EditCommand extends Command {
     private static final int headerLen = InputCommandType.EDIT.name().length() + 1;
 
@@ -18,12 +21,19 @@ public class EditCommand extends Command {
         return "EditCommand: Error reaching the right edit command";
     }
 
+    /**
+     * Checks if the input is an edit command
+     */
     public static boolean isEdit(String input) {
         return input.length() > headerLen
                 && input.substring(0, headerLen - 1).equalsIgnoreCase(InputCommandType.EDIT.name())
                 && input.substring(headerLen - 1, headerLen).isBlank();
     }
 
+    /**
+     * Returns an {@code EditCommand} if the given input is a valid edit command,
+     * otherwise the appropriate error command is returned.
+     */
     public static Command getEditCommand(String input) {
         // input format should be "edit <index> <field to change>" (only 1 field to change expected)
         // Checks if the input is of this format, and if <index> and <field to change> are valid.

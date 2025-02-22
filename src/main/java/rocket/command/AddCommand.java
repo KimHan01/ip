@@ -54,7 +54,7 @@ public class AddCommand extends Command {
      * Returns a response for successfully adding a task into the task list.
      */
     private String getAddTaskResponse(Task task, int listSize) {
-        return "Successfully added ToDo:\n"
+        return "Successfully added:\n"
                 + task.toString() + "\n"
                 + "Now you have " + listSize + " tasks in the list";
     }

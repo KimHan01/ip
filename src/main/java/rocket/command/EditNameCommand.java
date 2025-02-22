@@ -6,10 +6,18 @@ import rocket.task.Task;
 import rocket.task.TaskList;
 import rocket.ui.Ui;
 
+/**
+ * Represents a command to edit the name of a task
+ */
 public class EditNameCommand extends EditCommand {
     private final String newName;
     private final int index;
 
+    /**
+     * Creates a command to edit the name of a task
+     * @param newName The new name of the task
+     * @param taskNum The task number of the task
+     */
     public EditNameCommand(String newName, int taskNum) {
         this.newName = newName;
         this.index = taskNum - 1;
