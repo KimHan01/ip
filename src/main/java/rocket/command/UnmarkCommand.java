@@ -69,10 +69,8 @@ public class UnmarkCommand extends Command {
      * Returns a response for trying to unmark a task that is not in the task list.
      */
     private String getInvalidUnmarkResponse() {
-        return "You're trying to unmark a task that doesn't even exist? \n"
-                + "That's some next-level overthinking right there. \n"
-                + "Look, if it's not on the list, there's nothing to unmark. \n"
-                + "Double-check your list, alright?";
+        return "Seriously? You're tryin' to unmark a task that doesn't even exist! "
+                + "Maybe check the list first before makin' me do the impossible!";
     }
 
     private static int getTaskNumToUnmark(String input) throws NumberFormatException {
