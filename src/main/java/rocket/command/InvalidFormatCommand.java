@@ -1,8 +1,8 @@
 package rocket.command;
 
+import rocket.storage.Storage;
 import rocket.task.TaskList;
 import rocket.ui.Ui;
-import rocket.storage.Storage;
 
 /**
  * Represents a command to handle invalid format commands.
@@ -25,8 +25,8 @@ public class InvalidFormatCommand extends Command {
      * Returns a response to invalid input from user.
      */
     private String getInvalidFormatResponse() {
-        return "Maybe you wanna try giving me something that makes sense,\n" +
-                "unless you want me to invent something out of thin air,\n" +
-                "which, trust me, you don't";
+        return "Maybe you wanna try giving me something that makes sense,\n"
+                + "unless you want me to invent something out of thin air,\n"
+                + "which, trust me, you don't";
     }
 }

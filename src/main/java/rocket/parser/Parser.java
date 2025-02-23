@@ -1,22 +1,21 @@
 package rocket.parser;
 
-import rocket.command.EditCommand;
-import rocket.task.Deadline;
-import rocket.task.Event;
-import rocket.task.TaskType;
-import rocket.task.Todo;
-
-import rocket.command.InputCommandType;
-import rocket.command.Command;
 import rocket.command.AddCommand;
+import rocket.command.Command;
 import rocket.command.DeleteCommand;
+import rocket.command.EditCommand;
 import rocket.command.ExitCommand;
 import rocket.command.FindCommand;
+import rocket.command.HelpCommand;
+import rocket.command.InputCommandType;
 import rocket.command.InvalidFormatCommand;
 import rocket.command.ListCommand;
 import rocket.command.MarkCommand;
 import rocket.command.UnmarkCommand;
-import rocket.command.HelpCommand;
+import rocket.task.Deadline;
+import rocket.task.Event;
+import rocket.task.TaskType;
+import rocket.task.Todo;
 
 /**
  * Represents a parser that handles parsing user input into commands.

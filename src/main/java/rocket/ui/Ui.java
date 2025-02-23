@@ -1,15 +1,14 @@
 package rocket.ui;
+import java.util.Scanner;
 
 import rocket.Rocket;
-
-import java.util.Scanner;
 
 /**
  * User Interface class which handles the interaction between user and {@link Rocket}.
  * Contains methods to read input from user and display messages to user.
  */
 public class Ui {
-    private Scanner sc;
+    private final Scanner sc;
 
     /**
      * Creates a {@code Ui} with an initialized {@code Scanner} which takes input from user
@@ -26,13 +25,15 @@ public class Ui {
         return sc.nextLine();
     }
 
-    private final String LINE = "-----------------------------------------------------------------------------------" +
-            "------------------------";
-
+    /**
+     * Prints to the console with the given message as the output
+     */
     public void read(String message) {
-        System.out.println(LINE);
+        String line = "-----------------------------------------------------------------------------------"
+                + "------------------------";
+        System.out.println(line);
         System.out.println(message);
-        System.out.println(LINE);
+        System.out.println(line);
     }
 
     /**

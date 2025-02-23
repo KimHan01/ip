@@ -9,8 +9,8 @@ import rocket.ui.Ui;
  * Represents a command to delete a task from the task list.
  */
 public class DeleteCommand extends Command {
+    private static final int HEADER_LEN = InputCommandType.DELETE.name().length() + 1;
     private final int indexToDelete;
-    private static final int headerLen = InputCommandType.DELETE.name().length() + 1;
 
     /**
      * Creates a new {@code DeleteCommand} with the given task number to delete.
@@ -65,12 +65,12 @@ public class DeleteCommand extends Command {
      * Returns a response for trying to delete a task that does not exist in the task list.
      */
     private String getInvalidDeleteResponse() {
-        return "Yeah, that's not happening. The list has limits, just like my patience.\n" +
-                "Check your list, make sure the task exists, and try again";
+        return "Yeah, that's not happening. The list has limits, just like my patience.\n"
+                + "Check your list, make sure the task exists, and try again";
     }
 
     private static int getTaskNumToDelete(String input) throws NumberFormatException {
-        String taskNum = input.substring(headerLen);
+        String taskNum = input.substring(HEADER_LEN);
         return Integer.parseInt(taskNum);
     }
 }

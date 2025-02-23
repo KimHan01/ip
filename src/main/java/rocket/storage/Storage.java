@@ -1,11 +1,4 @@
 package rocket.storage;
-
-import rocket.task.Deadline;
-import rocket.task.Event;
-import rocket.task.Task;
-import rocket.task.TaskList;
-import rocket.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,6 +7,12 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import rocket.task.Deadline;
+import rocket.task.Event;
+import rocket.task.Task;
+import rocket.task.TaskList;
+import rocket.task.Todo;
 
 /**
  * Represents the storage of tasks.
@@ -32,8 +31,8 @@ public class Storage {
         this.dir = file.getParentFile();
         createFilePath(); // Creates file if it does not exist
         createFilePath(); // Creates file if it does not exist
-        assert dir.isDirectory(): "Directory is not created";
-        assert file.isFile(): "File is not created";
+        assert dir.isDirectory() : "Directory is not created";
+        assert file.isFile() : "File is not created";
     }
 
     /**
@@ -86,6 +85,9 @@ public class Storage {
                 case "E":
                     Event event = Event.fromTxt(body);
                     tasks.add(event);
+                    break;
+                default:
+                    // Should never reach the default case
                     break;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {

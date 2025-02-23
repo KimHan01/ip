@@ -1,5 +1,6 @@
 package rocket.ui;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import rocket.Rocket;
 import rocket.command.InputCommandType;
 
@@ -52,8 +54,11 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
+        // Used GitHub Copilot to learn how to delay the application for 2 seconds before exiting
         if (input.equalsIgnoreCase(InputCommandType.BYE.name())) {
-            javafx.application.Platform.exit();
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(event -> javafx.application.Platform.exit());
+            delay.play();
         }
     }
 

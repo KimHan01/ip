@@ -1,12 +1,11 @@
 package rocket;
+import java.io.FileNotFoundException;
 
-import rocket.storage.Storage;
 import rocket.command.Command;
 import rocket.parser.Parser;
+import rocket.storage.Storage;
 import rocket.task.TaskList;
 import rocket.ui.Ui;
-
-import java.io.FileNotFoundException;
 
 /**
  * The main class which represents the chatbot {@link Rocket}.
@@ -62,7 +61,7 @@ public class Rocket {
      * Returns rocket's introduction
      */
     public static String rocketIntro() {
-        return "Oh great, another day as a chatbot. Lets get this over with. What do you want?\n " +
-                "If you got no clue what you're doin', type help and I might not roast ya";
+        return "Oh great, another day as a chatbot. Lets get this over with. What do you want?\n"
+                + "If you got no clue what you're doin', type help and I might not roast ya";
     }
 }

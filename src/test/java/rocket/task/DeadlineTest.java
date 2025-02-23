@@ -1,14 +1,13 @@
 package rocket.task;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
-    LocalDate date = LocalDate.of(2030, 12, 30);
-    String dateStr = "Dec 30 2030";
+    private final LocalDate date = LocalDate.of(2030, 12, 30);
+    private final String dateStr = "Dec 30 2030";
     @Test
     public void toTxt_markDone_success() {
         assertEquals("D|1|test1|" + dateStr + "\n",
@@ -30,7 +29,7 @@ public class DeadlineTest {
         assertEquals("D|0|test1|" + dateStr + "\n",
                 new Deadline("test1", false, date).toTxt());
         assertEquals("D|0|1Test|" + dateStr + "\n",
-                new Deadline("1Test", false,date).toTxt());
+                new Deadline("1Test", false, date).toTxt());
     }
 
     @Test

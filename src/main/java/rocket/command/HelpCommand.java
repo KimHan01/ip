@@ -4,6 +4,9 @@ import rocket.storage.Storage;
 import rocket.task.TaskList;
 import rocket.ui.Ui;
 
+/**
+ * Represents a command to show the user guide
+ */
 public class HelpCommand extends Command {
     /**
      * Creates a new {@code HelpCommand}.
@@ -36,7 +39,7 @@ public class HelpCommand extends Command {
                     --> Edits a field of a task
                 BYE
                     --> exits the program
-                
+
                 Constraints:
                 * There must be a space after any command keyword.
                 * Date format: YYYY-MM-DD (e.g. 2025-06-07)
