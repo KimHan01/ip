@@ -32,7 +32,7 @@ public class ExitCommand extends Command {
      * Returns the farewell response.
      */
     private String getFarewellResponse() {
-        return "Alright, fine. You're leaving already? Whatever. "
-                + "Just don't blow anything up without me. Rocket out!\nmutters Stupid chatbot job...";
+        return "Finally, you're leavin'! Try not to blow anything up without me. "
+                + "Rocket out!\nmutters Stupid chatbot job...";
     }
 }
