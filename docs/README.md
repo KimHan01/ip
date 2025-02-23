@@ -13,6 +13,7 @@ Careful not to make mistakes lest you enjoy getting roasted.
   * [Unmark a Task](#unmarking-a-task-unmark)
   * [Find Tasks](#finding-tasks-by-name-find)
   * [Edit a Task](#edit-a-task-edit)
+  * [Delete a Task](#deleting-a-task-delete)
   * [Exit Application](#exiting-the-application-bye)
 - [Credits](#credits)
 
@@ -143,6 +144,20 @@ To:
 [D][ ] Assignment (by: Feb 24 2025)
 ```
 
+## Deleting a task: `delete`
+
+Deletes a task from the list
+
+Format: `delete [index]`
+
+Example: `delete 1`  
+Expected Response:
+```
+I've removed this task:
+[D][ ] Assignment (by: Feb 24 2025)
+Now you have 0 tasks in the list.
+```
+
 ## Exiting the application: `bye`
 
 Exits the application
@@ -151,12 +166,12 @@ Exits the application
 
 The design for this user guide is inspired heavily by [AB-3's user guide](https://se-education.org/addressbook-level3/UserGuide.html)
 
-Most of rocket's responses are created with the help of ChatGPT to more accurately capture his personality.
+Most of Rocket's responses are created with the help of ChatGPT to more accurately capture his personality.
 
-GitHub Copilot was used to generate some of the java docs more quickly
+GitHub Copilot was used to generate some of the Javadocs more quickly
 
 ### Source of Media Assets:  
 - Rocket's chatbot image:  
-https://marvelcinematicuniverse.fandom.com/wiki/Rocket_Raccoon?file=Rocket_Vol._3.jpg
+[https://marvelcinematicuniverse.fandom.com/wiki/Rocket_Raccoon?file=Rocket_Vol._3.jpg](https://marvelcinematicuniverse.fandom.com/wiki/Rocket_Raccoon?file=Rocket_Vol._3.jpg)
 - Rocket application icon:   
-https://www.veryicon.com/icons/avatar/superhero-marvel/galaxy-guard-raccoon-rocket.html
+[https://www.veryicon.com/icons/avatar/superhero-marvel/galaxy-guard-raccoon-rocket.html](https://www.veryicon.com/icons/avatar/superhero-marvel/galaxy-guard-raccoon-rocket.html)
