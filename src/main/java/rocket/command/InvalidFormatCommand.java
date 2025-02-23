@@ -27,6 +27,7 @@ public class InvalidFormatCommand extends Command {
     private String getInvalidFormatResponse() {
         return "Maybe you wanna try giving me something that makes sense,\n"
                 + "unless you want me to invent something out of thin air,\n"
-                + "which, trust me, you don't";
+                + "which, trust me, you don't.\n"
+                + "Type help if you need it.";
     }
 }
