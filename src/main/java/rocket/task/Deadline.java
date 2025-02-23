@@ -1,4 +1,6 @@
 package rocket.task;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import rocket.command.AddCommand;
 import rocket.command.Command;
@@ -8,8 +10,7 @@ import rocket.command.InvalidFormatCommand;
 import rocket.exception.EmptyTaskNameException;
 import rocket.formatter.CustomDateFormatter;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+
 
 /**
  * Represents a Deadline, containing a single due date to complete the task by.
@@ -61,6 +62,9 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + dateTimeOutput + ")";
     }
 
+    /**
+     * Updates the deadline date of {@code Deadline} with the given new date
+     */
     public void updateBy(LocalDate newBy) {
         this.by = newBy;
         this.dateTimeOutput = CustomDateFormatter.formatOutput(newBy);

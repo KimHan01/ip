@@ -1,10 +1,10 @@
 package rocket.command;
 
 import rocket.common.Utils;
+import rocket.storage.Storage;
 import rocket.task.Task;
 import rocket.task.TaskList;
 import rocket.ui.Ui;
-import rocket.storage.Storage;
 
 /**
  * Represents a command to mark a task as done in the task list.
@@ -69,9 +69,9 @@ public class MarkCommand extends Command {
      * Returns a response for trying to mark a task that is not in the task list.
      */
     private String getInvalidMarkResponse() {
-        return "Oh, you're trying to mark off a task that doesn't even exist? \n" +
-                "If it's not on the list, it can't be marked as done. \n" +
-                "Check again, maybe the task is hiding in a parallel dimension or something.";
+        return "Oh, you're trying to mark off a task that doesn't even exist? \n"
+                + "If it's not on the list, it can't be marked as done. \n"
+                + "Check again, maybe the task is hiding in a parallel dimension or something.";
     }
 
     private static int getTaskNumToMark(String input) throws NumberFormatException {

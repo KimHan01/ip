@@ -14,15 +14,16 @@ Careful not to make mistakes lest you enjoy getting roasted.
   * [Find Tasks](#finding-tasks-by-name-find)
   * [Edit a Task](#edit-a-task-edit)
   * [Exit Application](#exiting-the-application-bye)
+- [Credits](#credits)
 
 ## Setup
 1. Ensure you have Java 17 or above installed in your Computer.
 2. Download the latest jar file from [here](https://github.com/KimHan01/ip/releases).
 3. Put the jar file into a folder that you wish to run the file from.
-4. Open a command terminal, `cd` into the folder you put the jar file in, 
-and use the `java -jar rocket.jar` command to run the application.  
-A GUI similar to the one below should appear in a few seconds.  
-![Ui.png](Ui.png)
+4. Open a command terminal, `cd` into the folder you put the jar file in,
+   and use the `java -jar rocket.jar` command to run the application.  
+   A GUI similar to the one below should appear in a few seconds.  
+   ![Ui.png](Ui.png)
 
 ## Features
 > [!NOTE]
@@ -144,4 +145,18 @@ To:
 
 ## Exiting the application: `bye`
 
-Exits the application  
+Exits the application
+
+## Credits
+
+The design for this user guide is inspired heavily by [AB-3's user guide](https://se-education.org/addressbook-level3/UserGuide.html)
+
+Most of rocket's responses are created with the help of ChatGPT to more accurately capture his personality.
+
+GitHub Copilot was used to generate some of the java docs more quickly
+
+### Source of Media Assets:  
+- Rocket's chatbot image:  
+https://marvelcinematicuniverse.fandom.com/wiki/Rocket_Raccoon?file=Rocket_Vol._3.jpg
+- Rocket application icon:   
+https://www.veryicon.com/icons/avatar/superhero-marvel/galaxy-guard-raccoon-rocket.html

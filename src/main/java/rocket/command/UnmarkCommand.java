@@ -1,10 +1,10 @@
 package rocket.command;
 
 import rocket.common.Utils;
+import rocket.storage.Storage;
 import rocket.task.Task;
 import rocket.task.TaskList;
 import rocket.ui.Ui;
-import rocket.storage.Storage;
 
 /**
  * Represents a command to unmark a task from the task list.
@@ -69,10 +69,10 @@ public class UnmarkCommand extends Command {
      * Returns a response for trying to unmark a task that is not in the task list.
      */
     private String getInvalidUnmarkResponse() {
-        return "You're trying to unmark a task that doesn't even exist? \n" +
-                "That's some next-level overthinking right there. \n" +
-                "Look, if it's not on the list, there's nothing to unmark. \n" +
-                "Double-check your list, alright?";
+        return "You're trying to unmark a task that doesn't even exist? \n"
+                + "That's some next-level overthinking right there. \n"
+                + "Look, if it's not on the list, there's nothing to unmark. \n"
+                + "Double-check your list, alright?";
     }
 
     private static int getTaskNumToUnmark(String input) throws NumberFormatException {

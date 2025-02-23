@@ -1,4 +1,6 @@
 package rocket.task;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import rocket.command.AddCommand;
 import rocket.command.Command;
@@ -7,9 +9,6 @@ import rocket.command.InvalidDateCommand;
 import rocket.command.InvalidFormatCommand;
 import rocket.exception.EmptyTaskNameException;
 import rocket.formatter.CustomDateFormatter;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents an Event task with a start date(from) and an end date(to).
@@ -72,11 +71,18 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (from: " + fromOutput + " to: " + toOutput + ")";
     }
 
+    /**
+     * Updates the start date of {@code Event} with the given new date
+     */
     public void updateTo(LocalDate date) {
         this.to = date;
         this.toOutput = CustomDateFormatter.formatOutput(to);
     }
 
+    /**
+     * Updates the end date of {@code Event} with the given new date
+     * @param date
+     */
     public void updateFrom(LocalDate date) {
         this.from = date;
         this.fromOutput = CustomDateFormatter.formatOutput(from);

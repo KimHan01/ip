@@ -37,7 +37,7 @@ public class AddCommand extends Command {
      * @param input the user input string
      * @param taskType the type of task to be added
      * @return the appropriate AddCommand based on the task type,
-     * or an appropriate error command if the input is invalid
+     *     or an appropriate error command if the input is invalid
      */
     public static Command getAddCommand(String input, TaskType taskType) {
         if (taskType == TaskType.TODO) {

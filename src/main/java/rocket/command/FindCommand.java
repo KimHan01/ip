@@ -23,7 +23,8 @@ public class FindCommand extends Command {
     public String execute(TaskList list, Ui ui, Storage storage) {
         TaskList found = new TaskList();
         for (Task task : list.getTasks()) {
-            if (task.getName().contains(keyword)) {
+            // Checks if task name contains the keyword (Case-insensitive)
+            if (task.getName().toLowerCase().contains(keyword.toLowerCase())) {
                 found.add(task);
             }
         }

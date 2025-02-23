@@ -1,9 +1,8 @@
 package rocket.task;
-
-import rocket.exception.RocketRuntimeException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import rocket.exception.RocketRuntimeException;
 
 /**
  * Represents a list of tasks.
@@ -119,16 +118,34 @@ public class TaskList {
         tasks.get(index).rename(newName);
     }
 
+    /**
+     * Updates the deadline date of {@code Deadline} task
+     * @param index The index of the {@code Deadline} task in the list
+     * @param newDate The new deadline date
+     * @throws ClassCastException If the task at given index is not a {@code Deadline} task
+     */
     public void updateDeadlineDate(int index, LocalDate newDate) throws ClassCastException {
         Deadline deadline = (Deadline) tasks.get(index);
         deadline.updateBy(newDate);
     }
 
+    /**
+     * Updates the start date of {@code Event} task
+     * @param index The index of the {@code Event} task in the list
+     * @param newDate The new start date
+     * @throws ClassCastException If the task at the given index is not an {@code Event} task
+     */
     public void updateEventStartDate(int index, LocalDate newDate) throws ClassCastException {
         Event event = (Event) tasks.get(index);
         event.updateFrom(newDate);
     }
 
+    /**
+     * Updates the end date of {@code Event} task
+     * @param index The index of the {@code Event} task in the list
+     * @param newDate The new end date
+     * @throws ClassCastException If the task at the given index is not an {@code Event} task
+     */
     public void updateEventEndDate(int index, LocalDate newDate) throws ClassCastException {
         Event event = (Event) tasks.get(index);
         event.updateTo(newDate);
