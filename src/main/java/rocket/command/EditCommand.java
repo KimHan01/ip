@@ -79,7 +79,7 @@ public class EditCommand extends Command {
     }
 
     String getIndexOutOfBoundsMessage() {
-        return "That task ain't there, try again!";
+        return "That task ain't on the list! Check your numbers and try again!";
     }
 
     String getClassCastExceptionMessage() {
