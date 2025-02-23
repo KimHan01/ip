@@ -67,7 +67,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void introMessage() {
-        dialogContainer.getChildren().add(DialogBox.getRocketDialog(rocket.rocketIntro(), rocketImage));
+        dialogContainer.getChildren().add(DialogBox.getRocketDialog(Rocket.rocketIntro(), rocketImage));
     }
 }
 
